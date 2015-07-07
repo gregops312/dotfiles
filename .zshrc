@@ -19,8 +19,7 @@ export ZSH=/Users/gkman/.oh-my-zsh
 		alias gitf='git fetch -a'
 		alias gitfp='git fetch -p'
 #	Uptake Core
-		alias dockerupinit='$(boot2docker shellinit)'
-		alias dockerup='docker-compose up --allow-insecure-ssl'
+alias dockerup="boot2docker start && $(boot2docker shellinit)  &&  docker-compose up --allow-insecure-ssl"
 
 
 
