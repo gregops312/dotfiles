@@ -6,7 +6,7 @@ promptinit
 PS1="Done$ "
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/gkman/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Alias
 
@@ -19,7 +19,7 @@ export ZSH=/Users/gkman/.oh-my-zsh
 		alias gitf='git fetch -a'
 		alias gitfp='git fetch -p'
 #	Uptake Core
-alias dockerup="boot2docker start && $(boot2docker shellinit)  &&  docker-compose up --allow-insecure-ssl"
+#alias dockerup="boot2docker start && $(boot2docker shellinit)  &&  docker-compose up --allow-insecure-ssl"
 
 
 
