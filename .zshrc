@@ -9,7 +9,11 @@ PS1="Done$ "
 export ZSH=~/.oh-my-zsh
 
 # Alias
-
+#       Linux
+		alias linux-version='lsb_release -a'
+#       SSH
+                alias gk='ssh server@gregorykman.tk'
+                alias school='ssh gkman@fourier.cs.iit.edu'
 # 	Git
 		alias gits='git status'
 		alias gitb='git branch -a'
@@ -20,7 +24,8 @@ export ZSH=~/.oh-my-zsh
 		alias gitfp='git fetch -p'
 #	Uptake Core
 #alias dockerup="boot2docker start && $(boot2docker shellinit)  &&  docker-compose up --allow-insecure-ssl"
-
+#       Course Contstruct
+		alias mvn-cc-noTest='mvn clean install -DskipTests=true'
 
 
 # Set name of the theme to load.
