@@ -5,15 +5,20 @@ promptinit
 
 PS1="Done$ "
 
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+# Export Paths
+    # Zsh Configs
+        export ZSH=~/.oh-my-zsh
+    # Docker Environment
+        #export DOCKER_TLS_VERIFY=1
+        #export DOCKER_HOST=tcp://192.168.59.103:2376
+        #export DOCKER_CERT_PATH=/Users/gkman/.boot2docker/certs/boot2docker-vm
 
 # Alias
-#       Linux
+#   Linux
 		alias linux-version='lsb_release -a'
-#       SSH
-                alias gk='ssh server@gregorykman.tk'
-                alias school='ssh gkman@fourier.cs.iit.edu'
+#   SSH
+        alias gk='ssh server@gregorykman.tk'
+        alias school='ssh gkman@fourier.cs.iit.edu'
 # 	Git
 		alias gits='git status'
 		alias gitb='git branch -a'
@@ -22,9 +27,17 @@ export ZSH=~/.oh-my-zsh
 		alias gita='git rebase --abort'
 		alias gitf='git fetch -a'
 		alias gitfp='git fetch -p'
-#	Uptake Core
-#alias dockerup="boot2docker start && $(boot2docker shellinit)  &&  docker-compose up --allow-insecure-ssl"
-#       Course Contstruct
+#   Uptake Core
+        alias shellinit=$(boot2docker shellinit)
+        alias docks="boot2docker start"
+        alias dockup="docker-compose up --allow-insecure-ssl"
+        alias certs="boot2docker ssh"
+        alias mvn-clean-install="mvn clean install"
+        alias mvn-ignore-local="mvn clean install -Dsurefire.ignore.failures=true -DenvTarget=local -Delasticsearch.host=192.168.59.10"
+        alias mvn-local="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget="local" -Delasticsearch.host="192.168.59.103""
+        alias mvn-ignore-server="mvn clean install -Dsurefire.ignore.failures=true -DenvTarget=dev -Delasticsearch.host=dev-unobtainium.uptake.com"
+        alias mvn-server="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget="dev" -Delasticsearch.host="dev-unobtainium.uptake.com""
+#   Course Contstruct
 		alias mvn-cc-noTest='mvn clean install -DskipTests=true'
 
 
