@@ -34,9 +34,10 @@ PS1="Done$ "
         alias certs="boot2docker ssh"
         alias mvn-clean-install="mvn clean install"
         alias mvn-ignore-local="mvn clean install -Dsurefire.ignore.failures=true -DenvTarget=local -Delasticsearch.host=192.168.59.10"
-        alias mvn-local="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget="local" -Delasticsearch.host="192.168.59.103""
+        alias mvn-local="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget=local -Delasticsearch.host=192.168.59.103"
         alias mvn-ignore-server="mvn clean install -Dsurefire.ignore.failures=true -DenvTarget=dev -Delasticsearch.host=dev-unobtainium.uptake.com"
-        alias mvn-server="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget="dev" -Delasticsearch.host="dev-unobtainium.uptake.com""
+        alias mvn-server="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget=dev -Delasticsearch.host=dev-unobtainium.uptake.com"
+        alias mvn-integration="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget=intdev -Delasticsearch.host=integration.uptake.com"
 #   Course Contstruct
 		alias mvn-cc-noTest='mvn clean install -DskipTests=true'
 
