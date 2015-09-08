@@ -31,7 +31,7 @@ PS1="Done$ "
 	alias gitf='git fetch -a'
 	alias gitfp='git fetch -p'
 #   Uptake Core
-	# Variabels
+	# Variables
 		b2d_local="-DenvTarget=local -Delasticsearch.host=192.168.59.103"
 		dev_un="-DenvTarget=dev -Delasticsearch.host=dev-unobtainium.uptake.com"
 		integration="-DenvTarget=intdev -Delasticsearch.host=integration.uptake.com"
@@ -39,11 +39,11 @@ PS1="Done$ "
 		ignore_no="-Dsurefire.ignore.failures=false"
 
 	alias test-local="mvn clean install $ignore_no $b2d_local"
-        alias mvn-ignore-local="mvn clean install -Dsurefire.ignore.failures=true -DenvTarget=local -Delasticsearch.host=192.168.59.103"
-        alias mvn-local="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget=local -Delasticsearch.host=192.168.59.103"
-        alias mvn-ignore-server="mvn clean install -Dsurefire.ignore.failures=true -DenvTarget=dev -Delasticsearch.host=dev-unobtainium.uptake.com"
-        alias mvn-server="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget=dev -Delasticsearch.host=dev-unobtainium.uptake.com"
-        alias mvn-integration="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget=intdev -Delasticsearch.host=integration.uptake.com"
+        alias mvn-ignore-local="mvn clean install -Dsurefire.ignore.failures=true $b2d_local"
+        alias mvn-local="mvn clean install -Dsurefire.ignore.failures=false $b2d_local"
+        alias mvn-ignore-server="mvn clean install -Dsurefire.ignore.failures=true $dev_un"
+        alias mvn-server="mvn clean install -Dsurefire.ignore.failures=false $dev_un"
+        alias mvn-integration="mvn clean install -Dsurefire.ignore.failures=false $integration"
 #   Maven
 	alias mvn-clean-install="mvn clean install"
 	alias mvn-ci-skipTest='mvn clean install -DskipTests=true'
