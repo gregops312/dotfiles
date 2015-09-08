@@ -4,7 +4,8 @@ autoload -U promptinit
 promptinit
 
 PS1="Done$ "
-
+# Variables
+	
 # Export Paths
     # Zsh Configs
         export ZSH=~/.oh-my-zsh
@@ -30,7 +31,15 @@ PS1="Done$ "
 	alias gitf='git fetch -a'
 	alias gitfp='git fetch -p'
 #   Uptake Core
-        alias mvn-ignore-local="mvn clean install -Dsurefire.ignore.failures=true -DenvTarget=local -Delasticsearch.host=192.168.59.10"
+	# Variabels
+		b2d_local="-DenvTarget=local -Delasticsearch.host=192.168.59.103"
+		dev_un="-DenvTarget=dev -Delasticsearch.host=dev-unobtainium.uptake.com"
+		integration="-DenvTarget=intdev -Delasticsearch.host=integration.uptake.com"
+		ignore_yes="-Dsurefire.ignore.failures=true"
+		ignore_no="-Dsurefire.ignore.failures=false"
+
+	alias test-local="mvn clean install $ignore_no $b2d_local"
+        alias mvn-ignore-local="mvn clean install -Dsurefire.ignore.failures=true -DenvTarget=local -Delasticsearch.host=192.168.59.103"
         alias mvn-local="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget=local -Delasticsearch.host=192.168.59.103"
         alias mvn-ignore-server="mvn clean install -Dsurefire.ignore.failures=true -DenvTarget=dev -Delasticsearch.host=dev-unobtainium.uptake.com"
         alias mvn-server="mvn clean install -Dsurefire.ignore.failures=false -DenvTarget=dev -Delasticsearch.host=dev-unobtainium.uptake.com"
@@ -43,7 +52,11 @@ PS1="Done$ "
         alias docks="boot2docker start"
         alias dockup="docker-compose up --allow-insecure-ssl"
         alias certs="boot2docker ssh"
-
+#   Docker - Machine
+        alias dock-start="docker-machine start default"
+        alias dock-stop="docker-machine stop default"
+        alias dock-env="docker-machine env default"
+        alias dock-ip="docker-machine ip default"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
