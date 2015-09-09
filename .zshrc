@@ -35,16 +35,16 @@ PS1="Done$ "
 		ignore_no="-Dsurefire.ignore.failures=false"
 
 	alias test-local="mvn clean install $ignore_no $b2d_local"
-        alias mvn-ignore-local="mvn clean install -Dsurefire.ignore.failures=true $b2d_local"
-        alias mvn-local="mvn clean install -Dsurefire.ignore.failures=false $b2d_local"
-        alias mvn-ignore-server="mvn clean install -Dsurefire.ignore.failures=true $dev_un"
-        alias mvn-server="mvn clean install -Dsurefire.ignore.failures=false $dev_un"
-        alias mvn-integration="mvn clean install -Dsurefire.ignore.failures=false $integration"
+        alias mvn-ignore-local="mvn clean install $ignore_yes $b2d_local"
+        alias mvn-local="mvn clean install $ignore_no $b2d_local"
+        alias mvn-ignore-server="mvn clean install $ignore_yes $dev_un"
+        alias mvn-server="mvn clean install $ignore_no $dev_un"
+        alias mvn-integration="mvn clean install $ignore_no $integration"
 #   Maven
 	alias mvn-clean-install="mvn clean install"
 	alias mvn-ci-skipTest='mvn clean install -DskipTests=true'
 #   Boot 2 Docker
-	alias shellinit=$(boot2docker shellinit)
+	alias shellinit="$(boot2docker shellinit)"
         alias docks="boot2docker start"
         alias dockup="docker-compose up --allow-insecure-ssl"
         alias certs="boot2docker ssh"
