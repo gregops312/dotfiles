@@ -42,13 +42,17 @@ promptinit
             alias mvn--server-ignore="mvn clean install $ignore_yes $dev_un"
             alias mvn-server="mvn clean install $ignore_no $dev_un"
             alias mvn-integration="mvn clean install $ignore_no $int"
+#       NiFi
+            alias nifi-start="bash /Users/gkman/uptake/data-ingest/nifi-0.3.0/nifi-assembly/target/nifi-0.3.0-bin/nifi-0.3.0/bin/nifi.sh start"
+            alias nifi-stop="bash /Users/gkman/uptake/data-ingest/nifi-0.3.0/nifi-assembly/target/nifi-0.3.0-bin/nifi-0.3.0/bin/nifi.sh stop"
 #   Maven
         alias mvn-clean-install="mvn clean install"
         alias mvn-ci-skipTest='mvn clean install -DskipTests=true'
 #   Boot 2 Docker
-        alias shellinit="$(boot2docker shellinit)"
+#        alias shellinit="$(boot2docker shellinit)"
         alias docks="boot2docker start"
-        alias dockup="docker-compose up --allow-insecure-ssl"
+        alias dockup-dm="docker-compose -f docker-compose-dm.yml up"
+        alias dockup="docker-compose up"
         alias certs="boot2docker ssh"
 #   Docker - Machine
         alias dock-start="docker-machine start default"
