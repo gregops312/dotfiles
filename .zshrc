@@ -43,8 +43,8 @@ promptinit
             alias mvn-server="mvn clean install $ignore_no $dev_un"
             alias mvn-integration="mvn clean install $ignore_no $int"
 #       NiFi
-            alias nifi-start="bash /Users/gkman/uptake/data-ingest/nifi-0.3.0/nifi-assembly/target/nifi-0.3.0-bin/nifi-0.3.0/bin/nifi.sh start"
-            alias nifi-stop="bash /Users/gkman/uptake/data-ingest/nifi-0.3.0/nifi-assembly/target/nifi-0.3.0-bin/nifi-0.3.0/bin/nifi.sh stop"
+            alias nifi-start="bash /Applications/nifi-0.3.0/nifi-assembly/target/nifi-0.3.0-bin/nifi-0.3.0/bin/nifi.sh start"
+            alias nifi-stop="bash /Applications/nifi-0.3.0/nifi-assembly/target/nifi-0.3.0-bin/nifi-0.3.0/bin/nifi.sh stop"
 #   Maven
         alias mvn-clean-install="mvn clean install"
         alias mvn-ci-skipTest='mvn clean install -DskipTests=true'
