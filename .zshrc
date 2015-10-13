@@ -45,6 +45,8 @@ promptinit
 #       NiFi
             alias nifi-start="bash /Applications/nifi-0.3.0/nifi-assembly/target/nifi-0.3.0-bin/nifi-0.3.0/bin/nifi.sh start"
             alias nifi-stop="bash /Applications/nifi-0.3.0/nifi-assembly/target/nifi-0.3.0-bin/nifi-0.3.0/bin/nifi.sh stop"
+#       Elastic Search
+            alias es="bash /Applications/elasticsearch-1.7.1/bin/elasticsearch"
 #   Maven
         alias mvn-clean-install="mvn clean install"
         alias mvn-ci-skipTest='mvn clean install -DskipTests=true'

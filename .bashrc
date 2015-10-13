@@ -1,3 +1,8 @@
+# Auto Completion
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
+
+
 git='%{$fg_bold[blue]%}$(git_prompt_info)%'
 user_host="%n%D{@}%m"
 date_time="${fg[red]%}%W-%T%"
@@ -16,7 +21,7 @@ DATETIME='\[\e[31m\]\d-\A'
 PROMPT='\n\e[0m\]$'
 
 #PS1='${MACHINE} ${DIR} ${DATETIME} ${PROMPT} '
-PS1='\u@\h \[\e[36m\]$PWD \[\e[31m\]\D{}-\A \n\e[0m\]$ '
+PS1='\[\e[1;0m\]\u@\h \[\e[1;36m\]$PWD \[\e[1;31m\]\D{%Y/%m/%d}-\A \n\e[1;0m\]\$ '
 
 # Variables
 
