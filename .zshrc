@@ -61,6 +61,10 @@ promptinit
         alias dock-stop="docker-machine stop default"
         alias dock-env="docker-machine env default"
         alias dock-ip="docker-machine ip default"
+#   Plex
+        alias plex-start="sudo systemctl start plexmediaserver.service"
+        alias plex-disable-firewall="sudo systemctl stop firewalld.service"
+
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
