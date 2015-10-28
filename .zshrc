@@ -37,7 +37,7 @@
             alias mvn-dm="mvn clean install $ignore_no $dm"
             alias mvn-b2d-ignore="mvn clean install $ignore_yes $b2d"
             alias mvn-b2d="mvn clean install $ignore_no $b2d"
-            alias mvn--server-ignore="mvn clean install $ignore_yes $dev_un"
+            alias mvn-server-ignore="mvn clean install $ignore_yes $dev_un"
             alias mvn-server="mvn clean install $ignore_no $dev_un"
             alias mvn-integration="mvn clean install $ignore_no $int"
 #       Docker - Machine
