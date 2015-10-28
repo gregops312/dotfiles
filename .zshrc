@@ -1,11 +1,8 @@
 #   Colors
     autoload -U colors && colors
 
-autoload -U promptinit
-promptinit
-
-#PS1="Done$ "
-# Variables
+    autoload -U promptinit
+    promptinit
 
 # Export Paths
     # Zsh Configs
@@ -35,6 +32,7 @@ promptinit
             ignore_yes="-Dsurefire.ignore.failures=true"
             ignore_no="-Dsurefire.ignore.failures=false"
 #       Commands
+            alias db-tools="java -jar $(find $(git rev-parse --show-toplevel) -name "uptake-database-tools-*.jar" | grep -v "tests") -c init -e=local -t=192.168.59.103"
             alias mvn-dm-ignore="mvn clean install $ignore_yes $dm"
             alias mvn-dm="mvn clean install $ignore_no $dm"
             alias mvn-b2d-ignore="mvn clean install $ignore_yes $b2d"
@@ -42,6 +40,12 @@ promptinit
             alias mvn--server-ignore="mvn clean install $ignore_yes $dev_un"
             alias mvn-server="mvn clean install $ignore_no $dev_un"
             alias mvn-integration="mvn clean install $ignore_no $int"
+#       Docker - Machine
+            alias dock-start="docker-machine start default"
+            alias dock-stop="docker-machine stop default"
+            alias dock-env="docker-machine env default"
+            alias dock-ip="docker-machine ip default"
+#   Uptake Data Ingestion
 #       NiFi
             alias nifi-start="bash /Applications/nifi-0.3.0/nifi-assembly/target/nifi-0.3.0-bin/nifi-0.3.0/bin/nifi.sh start"
             alias nifi-stop="bash /Applications/nifi-0.3.0/nifi-assembly/target/nifi-0.3.0-bin/nifi-0.3.0/bin/nifi.sh stop"
@@ -50,17 +54,6 @@ promptinit
 #   Maven
         alias mvn-clean-install="mvn clean install"
         alias mvn-ci-skipTest='mvn clean install -DskipTests=true'
-#   Boot 2 Docker
-#        alias shellinit="$(boot2docker shellinit)"
-        alias docks="boot2docker start"
-        alias dockup-dm="docker-compose -f docker-compose-dm.yml up"
-        alias dockup="docker-compose up"
-        alias certs="boot2docker ssh"
-#   Docker - Machine
-        alias dock-start="docker-machine start default"
-        alias dock-stop="docker-machine stop default"
-        alias dock-env="docker-machine env default"
-        alias dock-ip="docker-machine ip default"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/

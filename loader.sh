@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 cp .zshrc ~/
 cp .bash_profile ~/
