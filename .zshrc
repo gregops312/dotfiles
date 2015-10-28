@@ -54,6 +54,9 @@
 #   Maven
         alias mvn-clean-install="mvn clean install"
         alias mvn-ci-skipTest='mvn clean install -DskipTests=true'
+#   Plex
+        alias plex-start="sudo systemctl start plexmediaserver.service"
+        alias plex-disable-firewall="sudo systemctl stop firewalld.service"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
