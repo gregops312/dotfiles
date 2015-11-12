@@ -12,7 +12,7 @@
         alias linux-version='lsb_release -a'
         alias cl='clear'
 #   SSH
-        alias gk='ssh server@gregorykman.tk'
+        alias gk='ssh gkman@gregorykman.tk'
         alias school='ssh gkman@fourier.cs.iit.edu'
 #   Git
         alias gits='git status'
@@ -58,6 +58,9 @@
         alias plex-start="sudo systemctl start plexmediaserver.service"
         alias plex-stop="sudo systemctl stop plexmediaserver.service"
         alias plex-disable-firewall="sudo systemctl stop firewalld.service"
+ #   Web Server
+        alias web-edit="/etc/httpd/conf/httpd.conf"
+        alias web-start="service httpd start"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
