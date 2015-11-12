@@ -32,7 +32,7 @@
             ignore_yes="-Dsurefire.ignore.failures=true"
             ignore_no="-Dsurefire.ignore.failures=false"
 #       Commands
-            alias db-tools="java -jar $(find $(git rev-parse --show-toplevel) -name "uptake-database-tools-*.jar" | grep -v "tests") -c init -e=local -t=192.168.59.103"
+#            alias db-tools="java -jar $(find $(git rev-parse --show-toplevel) -name "uptake-database-tools-*.jar" | grep -v "tests") -c init -e=local -t=192.168.59.103"
             alias mvn-dm-ignore="mvn clean install $ignore_yes $dm"
             alias mvn-dm="mvn clean install $ignore_no $dm"
             alias mvn-b2d-ignore="mvn clean install $ignore_yes $b2d"
@@ -56,6 +56,7 @@
         alias mvn-ci-skipTest='mvn clean install -DskipTests=true'
 #   Plex
         alias plex-start="sudo systemctl start plexmediaserver.service"
+        alias plex-stop="sudo systemctl stop plexmediaserver.service"
         alias plex-disable-firewall="sudo systemctl stop firewalld.service"
 
 # Set name of the theme to load.
