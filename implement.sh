@@ -6,3 +6,4 @@ cp greg-kman.zsh-theme ~/.oh-my-zsh/themes
 cp .tmux.conf ~/
 cp .vimrc ~/
 cp .bashrc ~/
+
