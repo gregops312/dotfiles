@@ -1,9 +1,16 @@
 #!/bin/bash
 
-cp .zshrc ~/
-cp .bash_profile ~/
-cp greg-kman.zsh-theme ~/.oh-my-zsh/themes
-cp .tmux.conf ~/
-cp .vimrc ~/
-cp .bashrc ~/
+#   Bash
+cp bash/.bashrc ~/
+cp bash/.bash_profile ~/
+
+#   Tmux
+cp tmux/.tmux.conf ~/
+
+#   Vim
+cp vim/.vimrc ~/
+
+#   Zsh
+cp zsh/.zshrc ~/
+cp zsh/greg-kman.zsh-theme ~/.oh-my-zsh/themes
 
