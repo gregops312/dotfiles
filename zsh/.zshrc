@@ -36,15 +36,14 @@ elif [[ ( "$osnn" = 'mac' ) || ( "$osnn" = 'linux' ) ]]; then
     #   Variables
     #       Personal
     #       Work
-        b2d="-DenvTarget=local -Delasticsearch.host=192.168.59.103"
-        dm="-DenvTarget=local -Delasticsearch.host=192.168.99.100"
-        dev_un="-DenvTarget=dev -Delasticsearch.host=dev-unobtainium.uptake.com"
-        int="-DenvTarget=intdev -Delasticsearch.host=integration.uptake.com"
+        local_es="-DenvTarget=local -Delasticsearch.host=192.168.99.103"
         ignore_yes="-Dsurefire.ignore.failures=true"
         ignore_no="-Dsurefire.ignore.failures=false"
 
     #   SSH
             alias gk='ssh gkman@gregorykman.tk'
+            alias adam='ssh greg.kman@dev-adamantium.uptake.com'
+            alias emd='ssh gregory.kman@staging-emd-nifi.uptake.com'
     #   Git
             alias gits='git status'
             alias gitb='git branch'
@@ -59,20 +58,18 @@ elif [[ ( "$osnn" = 'mac' ) || ( "$osnn" = 'linux' ) ]]; then
             alias mvn-clean-install="mvn clean install"
             alias mvn-ci-skipTest='mvn clean install -DskipTests=true'
     #           Work
-            alias mvn-dm-ignore="mvn clean install $ignore_yes $dm"
-            alias mvn-dm="mvn clean install $ignore_no $dm"
-            alias mvn-b2d-ignore="mvn clean install $ignore_yes $b2d"
-            alias mvn-b2d="mvn clean install $ignore_no $b2d"
+            alias mvn-local-ignore="mvn clean install $ignore_yes $local_es"
+            alias mvn-local="mvn clean install $ignore_no $local_es"
             alias mvn-server-ignore="mvn clean install $ignore_yes $dev_un"
             alias mvn-server="mvn clean install $ignore_no $dev_un"
-            alias mvn-integration="mvn clean install $ignore_no $int"
     #   Elastic Search
             alias es="bash /Applications/elasticsearch-1.7.1/bin/elasticsearch"
     #   Docker-Machine
-            alias dock-start="docker-machine start default"
-            alias dock-stop="docker-machine stop default"
-            alias dock-env="docker-machine env default"
-            alias dock-ip="docker-machine ip default"
+            alias uptake-core-start="docker-machine start uptakedev"
+            alias uptake-core-stop="docker-machine stop uptakedev"
+            alias uptake-core-env="docker-machine env uptakedev"
+            alias uptake-core-ip="docker-machine ip uptakedev"
+            alias uptake-core-ssh="docker-machine ssh uptakedev"
     #   NiFi
             alias nifi-start="bash /Applications/nifi-0.*.0/bin/nifi.sh start"
             alias nifi-stop="bash /Applications/nifi-0.*.0/bin/nifi.sh stop"

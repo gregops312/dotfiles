@@ -9,6 +9,7 @@ hOffset=-1
 vOffset=-1
 max=0
 space=''
+vSpace=''
 
 # echo ${#line0}
 # echo ${#line1}
@@ -16,9 +17,12 @@ space=''
 # echo ${#line3}
 # echo $numCols
 
+# Horizontal whitespace
 whitespace=`expr $numCols - ${#line3}`
 isHeven=`expr $whitespace % 2`
-vSpace=`expr $numRows - 4`
+
+# Vertical whitespace
+vSpace=`expr $numRows - 5`
 isVeven=`expr $vSpace % 2`
 
 # Handle Horizontal Offset
@@ -35,16 +39,23 @@ else
     done
 fi
 # Handle Vertical Offset
-# if [ $isVeven == 0 ]; then
-#     vOffset=`expr $vSpace / 2`
-# else
+if [ $isVeven == 0 ]; then
+    vOffset=`expr $vSpace / 2`
+    for (( i = 0; i < $vOffset; i++ )); do
+        vSpace+='\n'
+    done
+else
+    ws=`expr $vSpace + 1`
+    vOffset=`expr $vSpace / 2`
+    for (( i = 0; i < $vOffset; i++ )); do
+        vSpace+='\n'
+    done
+fi
 
 
 clear
 
-printf '%s' "$space"
-
-printf '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n'
+printf '%b' "$vSpace"
 printf '%s%s\n' "$space" "$line0"
 printf '%s%s\n' "$space" "$line1"
 printf '%s%s\n' "$space" "$line2"
