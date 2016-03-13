@@ -22,3 +22,18 @@ This will explain what my configs do and how to use them
 | Features | Bash Profile | Tmux | Vim | ZSH |
 | :------: | :----------: | :--: | :-: | :-: |
 | yes | asdf | asafd | dfg | gsfdd |
+
+
+
+## SSH key auth setup
+copy key to server with
+```
+scp ~/.ssh/id_rsa.pub user@server:~/.ssh/authorized_keys
+```
+
+logon to server and change permissions
+```chmod 700 ~/.ssh```
+
+```chmod 640 ~/.ssh/authorized_keys```
+
+
