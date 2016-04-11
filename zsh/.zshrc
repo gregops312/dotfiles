@@ -81,7 +81,6 @@ elif [[ ( "$osnn" = 'mac' ) || ( "$osnn" = 'linux' ) ]]; then
             alias plex-start="sudo systemctl start plexmediaserver.service"
             alias plex-stop="sudo systemctl stop plexmediaserver.service"
             alias plex-disable-firewall="sudo systemctl stop firewalld.service"
-    echo 'mac/linux'
 fi
 
 # Set name of the theme to load.
