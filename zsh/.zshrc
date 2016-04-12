@@ -1,7 +1,7 @@
-export ZSH=~/.oh-my-zsh
+# export ZSH=~/.oh-my-zsh
 autoload -U colors && colors
-autoload -U promptinit
-promptinit
+# autoload -U promptinit
+# promptinit
 
 # Programs General
 #   General
@@ -12,7 +12,7 @@ promptinit
             alias gits='git status'
             alias gitb='git branch'
             alias gitba='git branch -a'
-            alias gitca'git commit -a'
+            alias gitca='git commit -a'
             alias gitl='git log'
             alias gita='git rebase --abort'
             alias gitf='git fetch -a'
@@ -31,13 +31,13 @@ promptinit
 # Programs Machine Specific
 #   Personal
 #   Personal-Server
-        if [ "$HOST" == 'server-centos' ]; then
+        # if [ "$HOST" == 'server-centos' ]; then
             alias web-edit="/etc/httpd/conf/httpd.conf"
             alias web-start="service httpd start"
             alias plex-start="sudo systemctl start plexmediaserver.service"
             alias plex-stop="sudo systemctl stop plexmediaserver.service"
             alias plex-disable-firewall="sudo systemctl stop firewalld.service"
-        fi
+        # fi
 #   Work
 #       Variables
             local_es="-DenvTarget=local -Delasticsearch.host=192.168.99.103"

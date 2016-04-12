@@ -14,8 +14,3 @@ bash ./vim/set-vim.sh
 
 #   Zsh
 bash ./zsh/set-zsh
-
-# Set
-bash ./scripts/check-os
-source ~/.zshrc
-# clear
