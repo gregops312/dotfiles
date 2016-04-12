@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run the scripts for each
-bash ./testing/kman.sh
+# bash ./testing/kman.sh
 
 #	Bash
 bash ./bash/set-bash.sh
@@ -13,8 +13,9 @@ bash ./tmux/set-tmux.sh
 bash ./vim/set-vim.sh
 
 #   Zsh
-bash ./zsh/set-zsh.sh
+bash ./zsh/set-zsh
 
-# Set 
+# Set
+bash ./scripts/check-os
 source ~/.zshrc
-clear
+# clear
