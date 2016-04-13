@@ -1,7 +1,7 @@
-# export ZSH=~/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 autoload -U colors && colors
-# autoload -U promptinit
-# promptinit
+autoload -U promptinit
+promptinit
 
 # Programs General
 #   General
