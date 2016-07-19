@@ -9,10 +9,7 @@ This will explain what my configs do and how to use them
 	.zshrc
 	greg-kman.zsh-theme
 
-0. Clone the repository
-    * <http://>
-
-2. Run loader.sh will
+1. Run loader.sh will
 	* cp .bash_profile ~/
 	* cp .tmux_conf ~/
 	* cp .vimrc ~/
