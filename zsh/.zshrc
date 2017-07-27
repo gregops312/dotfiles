@@ -18,6 +18,11 @@ promptinit
             alias gitf='git fetch -a'
             alias gitfp='git fetch -p'
         fi
+#   Docker
+        dockerc='which docker-compose'
+        if [ "$dockerc" != 'docker-compose not found' ]; then
+            alias dc='docker-compose'
+        fi
 # Programs Machine Specific
 #   Personal
 #   Personal-Server
@@ -31,5 +36,5 @@ promptinit
 
 # Set theme in ~/.oh-my-zsh/themes/
 ZSH_THEME="greg-kman"
-plugins=(git gradle)
+plugins=(docker git gradle kitchen knife mvn python)
 source "$ZSH/oh-my-zsh.sh"

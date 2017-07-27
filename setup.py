@@ -2,8 +2,10 @@
 # import argparse
 import logging
 import platform
+import shutil
 import subprocess
 
+from os.path import expanduser
 
 logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -11,10 +13,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 logger.setLevel('INFO')
+user_home = expanduser("~")
 
 def bash():
     logger.info("Setting up Bash")
-    subprocess.run(["./bash/set-bash.sh"], shell=True)
+    shutil.copyfile("bash/.bash_profile", f'{user_home}/.bash_profile')
+    shutil.copyfile("bash/.bashrc", f'{user_home}/.bashrc')
 
 def check_os():
     if platform.system() == "Darwin":
@@ -42,18 +46,30 @@ def check_os():
 
 def tmux():
     logger.info("Setting up Tmux")
-    subprocess.run(["./tmux/set-tmux.sh"], shell=True)
+    shutil.copyfile("tmux/.tmux.conf", f'{user_home}/.tmux.conf')
 
 def vim():
     logger.info("Setting up Vim")
-    subprocess.run(["./vim/set-vim.sh"], shell=True)
+    shutil.copyfile("vim/.vimrc", f'{user_home}/.vimrc')
 
 def zsh():
     logger.info("Setting up Zsh")
-    subprocess.run(["./zsh/set-zsh.sh"], shell=True)
+    shutil.copyfile("zsh/.zshrc", f'{user_home}/.zshrc')
+    shutil.copyfile("zsh/greg-kman.zsh-theme", f'{user_home}/.oh-my-zsh/themes/greg-kman.zsh-theme')
 
 def main():
     check_os()
 
 if __name__ == "__main__":
     main()
+
+
+
+    # vim='which vim'
+    #
+    # if [ "$vim" != 'vim not found' ]; then
+    # 	cp vim/.vimrc ~/
+    # else
+    # 	clear
+    # 	echo 'vim not found'
+    # fi
