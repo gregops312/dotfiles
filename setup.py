@@ -1,10 +1,11 @@
 #!/usr/bin/env python3.6
 # import argparse
 import logging
+import glob
 import platform
 import shutil
 import subprocess
-
+import os
 from os.path import expanduser
 
 logging.basicConfig(
@@ -50,6 +51,18 @@ def tmux():
 
 def vim():
     logger.info("Setting up Vim")
+
+    # if dir doesn't exist 
+    subprocess.run(["git","clone", "https://github.com/VundleVim/Vundle.vim.git", f'{user_home}/.vim/bundle/Vundle.vim'])
+    subprocess.run(["mkdir", "-p", f'{user_home}/.vim/colors'])
+    subprocess.run(["vim", "+PluginInstall", "+qall"])
+
+    for file in glob.glob(f'{user_home}/.vim/bundle/vim-colorschemes/colors/*'):
+        shutil.copy(file, f'{user_home}/.vim/colors')
+
+    for file in glob.glob(f'{user_home}/.vim/bundle/vim-railscasts-theme/colors/*'):
+        shutil.copy(file, f'{user_home}/.vim/colors')
+
     shutil.copyfile("vim/.vimrc", f'{user_home}/.vimrc')
 
 def zsh():
