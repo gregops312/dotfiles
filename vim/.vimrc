@@ -13,8 +13,13 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
 
-Plugin 'flazz/vim-colorschemes'
-colorscheme railscasts
+" Color Schemes
+
+  Plugin 'flazz/vim-colorschemes'
+    colorscheme railscasts
+
+  " Provides easy code commenting
+  Plugin 'git://github.com/tomtom/tcomment_vim'
 
 " Status Bar
   Plugin 'git://github.com/bling/vim-airline.git'
