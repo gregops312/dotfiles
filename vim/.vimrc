@@ -1,51 +1,71 @@
-" Turns on line numbers
-    set number
-" Status bar
-    set laststatus=2                " keep bar on
-    set statusline+=%F              " full path -> file
-    set statusline=%t               " show file
-    "set statusline+=\ %P            " show percent in file
-    set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\   " Rownumber/total (%)
-    "set statusline +=%1*%=%5l%*     " current line
-    "set statusline +=%2*/%L%*       " total lines
-    set statusline +=%1*%4v\ %*     " virtual column number
-    "set statusline +=%2*0x%04B\ %*  " character under cursor
-" Colors
-    colorscheme darkblue
-    hi User8 guifg=#ffffff  guibg=#5b7fbb
-" Spacing
-    " Tab width 4 spaces
-        filetype plugin indent on
-        set tabstop=4
-        set shiftwidth=4
-        set expandtab
-        set softtabstop=4
-" Clean up
-"       " Show Whitespace
-            set list
-            set listchars=trail:.
+" Brief help:
+  " :PluginList          - list configured bundles
+  " :PluginInstall(!)    - install(update) bundles
+  " :PluginSearch(!) foo - search(or refresh cache first) for foo
+  " :PluginClean(!)      - confirm(or auto-ap prove) removal of unused bundles
+  " for more details see :h vundle  or https://github.com/gmarik/vundle
+
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+" Plugins
+
+Plugin 'flazz/vim-colorschemes'
+colorscheme railscasts
+
+" Status Bar
+  Plugin 'git://github.com/bling/vim-airline.git'
+
+" NERDTree
+  " Tree file browsing
+  Plugin 'git://github.com/scrooloose/nerdtree.git'
+    noremap <silent> <C-e> :NERDTreeToggle<CR>:silent NERDTreeMirror<CR>
+    map <silent> <C-d> :1<CR>X
+    " let NERDTreeShowBookmarks=1
+    let NERDTreeChDirMode=2
+    let NERDTreeQuitOnOpen=1
+    let NERDTreeShowHidden=1
+    let NERDTreeKeepTreeInNewTab=0
+    " Disable display of the 'Bookmarks' label and 'Press ? for help' text
+    let NERDTreeMinimalUI=1
+    " Use arrows instead of + ~ chars when displaying directories
+    let NERDTreeDirArrows=1
+    " let NERDTreeBookmarksFile= $HOME . '/.vim/.NERDTreeBookmarks'
+
+set background=dark
+
+" Interface
+  set history=1000  " store command history
+  set number        " show line numbers
+  set showmatch     " show matching brackets
+
+  " AutoReload .vimrc See http://vimcasts.org/episodes/updating-your-vimrc-file-on-the-fly/
+  if has("autocmd")
+    autocmd! bufwritepost .vimrc source $MYVIMRC
+  endif
+
+  " Indentation
+    set autoindent    " use previous indent on new line
+    set smartindent   " use on new line
+    set shiftwidth=2  " spaces for each auto-indent
+    set expandtab     " spaces over tabs
+    set tabstop=2     " number of spaces in a tab
+
+  " Show Whitespace
+    set listchars=trail:. " show trailing whitespace with . character
+    set list
+    set lcs=tab:-<,trail:.,extends:>,precedes:<
+
+" Search
+  set ignorecase " ignore case in seaches
+  set smartcase " override 'ignorecase' if seach contains uppercase characters
 
 " Syntax
-"   Highlighting
-    syntax on
+  syntax enable
 
-
-
-" Testing
-
-"set showcmd
-"set ai
-"set mouse=a
-"set background=dark
-
-
-if has("terminfo")
-    let &t_Co=16
-    let &t_AB="\<Esc>[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm"
-    let &t_AF="\<Esc>[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm"
-else
-    let &t_Co=16
-    let &t_Sf="\<Esc>[3%dm"
-    let &t_Sb="\<Esc>[4%dm"
-endif
+call vundle#end()
+filetype plugin indent on
 
