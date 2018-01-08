@@ -21,6 +21,9 @@ Plugin 'VundleVim/Vundle.vim'
   " Provides easy code commenting
   Plugin 'git://github.com/tomtom/tcomment_vim'
 
+" Fuzzy finder
+  Plugin 'kien/ctrlp.vim'
+
 " Status Bar
   Plugin 'git://github.com/bling/vim-airline.git'
 
@@ -41,6 +44,7 @@ Plugin 'VundleVim/Vundle.vim'
     " let NERDTreeBookmarksFile= $HOME . '/.vim/.NERDTreeBookmarks'
 
 set background=dark
+set backspace=indent,eol,start
 
 " Interface
   set history=1000  " store command history
