@@ -35,7 +35,7 @@ def bash():
 def my_programs():
     logger.info("Setting up my programs")
     subprocess.run(['mkdir', '-p', f'{user_home}/.programs'])
-    shutil.copyfile("programs/ruby-setup.sh", f'{user_home}/.programs/ruby-setup.sh')
+    shutil.copy2("programs/ruby-setup.sh", f'{user_home}/.programs/ruby-setup.sh')
 
 def setup(program_list):
     if 'bash' in program_list:
