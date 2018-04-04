@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel('INFO')
 user_home = expanduser("~")
 
+
 def check_app(app):
     logger.info(f'Checking for {app}')
     result = subprocess.run(['which', app])
@@ -31,10 +32,16 @@ def bash():
         shutil.copyfile("bash/.bash_profile", f'{user_home}/.bash_profile')
         shutil.copyfile("bash/.bashrc", f'{user_home}/.bashrc')
 
+def my_programs():
+    logger.info("Setting up my programs")
+    subprocess.run(['mkdir', '-p', f'{user_home}/.programs'])
+    shutil.copyfile("programs/ruby-setup.sh", f'{user_home}/.programs/ruby-setup.sh')
 
 def setup(program_list):
     if 'bash' in program_list:
         bash()
+    if 'my_programs' in program_list:
+        my_programs()
     if 'tmux' in program_list:
         tmux()
     if 'vim' in program_list:
@@ -53,8 +60,8 @@ def vim():
     if check_app('vim'):
         logger.info("Setting up Vim")
 
-        # if dir doesn't exist
-        subprocess.run(["git","clone", "https://github.com/VundleVim/Vundle.vim.git", f'{user_home}/.vim/bundle/Vundle.vim'])
+        if not os.path.exists(f'{user_home}/.vim/bundle/Vundle.vim'):
+            subprocess.run(["git","clone", "https://github.com/VundleVim/Vundle.vim.git", f'{user_home}/.vim/bundle/Vundle.vim'])
         subprocess.run(["mkdir", "-p", f'{user_home}/.vim/colors'])
         subprocess.run(["vim", "+PluginInstall", "+qall"])
 
@@ -71,27 +78,24 @@ def zsh():
     if check_app('zsh'):
         logger.info("Setting up Zsh")
         shutil.copyfile("zsh/.zshrc", f'{user_home}/.zshrc')
+        shutil.copyfile("zsh/.customrc", f'{user_home}/.customrc')
         shutil.copyfile("zsh/greg-kman.zsh-theme", f'{user_home}/.oh-my-zsh/themes/greg-kman.zsh-theme')
 
 
 def main():
     if platform.system() == "Darwin":
-
         logger.info("Mac OSx found")
-        setup(['bash', 'tmux', 'vim', 'zsh'])
+        setup(['bash', 'my_programs', 'tmux', 'vim', 'zsh'])
 
     elif platform.system() == "Linux":
-
         logger.info("Linux found")
-        setup(['bash', 'tmux', 'vim', 'zsh'])
+        setup(['bash', 'my_programs', 'tmux', 'vim', 'zsh'])
 
     elif platform.system() == "MINGW64":
-
         logger.info("Windows Bash found")
         setup(['vim'])
 
     elif platform.system() == "CYGWIN_NT":
-
         logger.info("Windows Cygwin found")
         setup(['bash', 'vim', 'zsh'])
 

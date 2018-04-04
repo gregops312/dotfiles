@@ -2,6 +2,8 @@ export ZSH=~/.oh-my-zsh
 autoload -U colors && colors
 autoload -U promptinit
 promptinit
+export PATH=$PATH:/usr/local/go/bin
+source ~/.customrc
 
 # Programs General
 #   General
