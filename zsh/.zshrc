@@ -12,8 +12,6 @@ source ~/.customrc
         git='which git'
         if [ "$git" != 'git not found' ]; then
             alias gits='git status'
-            alias gitb='git branch'
-            alias gitba='git branch -a'
             alias gitca='git commit -a'
             alias gitl='git log'
             alias gita='git rebase --abort'
