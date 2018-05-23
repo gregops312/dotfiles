@@ -78,7 +78,7 @@ def zsh():
     if check_app('zsh'):
         logger.info("Setting up Zsh")
         shutil.copyfile("zsh/.zshrc", f'{user_home}/.zshrc')
-        shutil.copyfile("zsh/.customrc", f'{user_home}/.customrc')
+        shutil.copyfile("zsh/.zshrc-custom", f'{user_home}/.zshrc-custom')
         shutil.copyfile("zsh/greg-kman.zsh-theme", f'{user_home}/.oh-my-zsh/themes/greg-kman.zsh-theme')
 
 
