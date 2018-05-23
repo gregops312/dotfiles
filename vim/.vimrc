@@ -44,7 +44,7 @@ Plugin 'VundleVim/Vundle.vim'
     " let NERDTreeBookmarksFile= $HOME . '/.vim/.NERDTreeBookmarks'
 
 set background=dark
-set backspace=indent,eol,start
+set backspace=indent,eol,start " backspace over eol, indents, and start of insets
 
 " Interface
   set history=1000  " store command history

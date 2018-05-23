@@ -1,9 +1,13 @@
+source ~/.zshrc-custom
+
 export ZSH=~/.oh-my-zsh
+export GOPATH=~/code/gocode
+export PATH=$PATH:~/code/gocode/bin
 autoload -U colors && colors
 autoload -U promptinit
 promptinit
-export PATH=$PATH:/usr/local/go/bin
-source ~/.customrc
+
+alias ussh='ssh -oStrictHostKeyChecking=no'
 
 # Programs General
 #   General
@@ -12,7 +16,6 @@ source ~/.customrc
         git='which git'
         if [ "$git" != 'git not found' ]; then
             alias gits='git status'
-            alias gitca='git commit -a'
             alias gitl='git log'
             alias gita='git rebase --abort'
             alias gitf='git fetch -a'
@@ -36,5 +39,5 @@ source ~/.customrc
 
 # Set theme in ~/.oh-my-zsh/themes/
 ZSH_THEME="greg-kman"
-plugins=(docker git gradle kitchen knife mvn python)
+plugins=(bundler chruby docker git gradle kitchen knife mvn python sudo kubectl completion zsh)
 source "$ZSH/oh-my-zsh.sh"
