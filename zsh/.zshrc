@@ -39,5 +39,5 @@ alias ussh='ssh -oStrictHostKeyChecking=no'
 
 # Set theme in ~/.oh-my-zsh/themes/
 ZSH_THEME="greg-kman"
-plugins=(bundler chruby docker git gradle kitchen knife mvn python sudo kubectl completion zsh)
+plugins=(bash bundler completion chruby docker git gradle kitchen knife kubectl mvn node python rake ruby sudo zsh)
 source "$ZSH/oh-my-zsh.sh"
