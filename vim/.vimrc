@@ -12,13 +12,13 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
+Plugin 'fatih/vim-go'
 
 " Color Schemes
-
   Plugin 'flazz/vim-colorschemes'
     colorscheme railscasts
 
-  " Provides easy code commenting
+" Provides easy code commenting
   Plugin 'git://github.com/tomtom/tcomment_vim'
 
 " Fuzzy finder
