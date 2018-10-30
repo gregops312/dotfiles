@@ -11,25 +11,27 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
+"
 " Plugins
-Plugin 'fatih/vim-go'
+"
+  " General
 
-" Color Schemes
-  Plugin 'flazz/vim-colorschemes'
+  " Color Schemes
+    Plugin 'flazz/vim-colorschemes'
     colorscheme railscasts
 
-" Provides easy code commenting
-  Plugin 'git://github.com/tomtom/tcomment_vim'
+    " Provides easy code commenting
+    Plugin 'git://github.com/tomtom/tcomment_vim'
 
-" Fuzzy finder
-  Plugin 'kien/ctrlp.vim'
+    " Fuzzy finder
+    Plugin 'kien/ctrlp.vim'
 
-" Status Bar
-  Plugin 'git://github.com/bling/vim-airline.git'
+    " Status Bar
+    Plugin 'git://github.com/bling/vim-airline.git'
 
-" NERDTree
-  " Tree file browsing
-  Plugin 'git://github.com/scrooloose/nerdtree.git'
+    " NERDTree
+      " Tree file browsing
+      Plugin 'git://github.com/scrooloose/nerdtree.git'
     noremap <silent> <C-e> :NERDTreeToggle<CR>:silent NERDTreeMirror<CR>
     map <silent> <C-d> :1<CR>X
     " let NERDTreeShowBookmarks=1
@@ -43,10 +45,29 @@ Plugin 'fatih/vim-go'
     let NERDTreeDirArrows=1
     " let NERDTreeBookmarksFile= $HOME . '/.vim/.NERDTreeBookmarks'
 
+    " Automatic closing of quotes, parenthesis, brackets, etc.
+    Plugin 'git://github.com/vim-scripts/delimitMate.vim.git'
+
+  "
+  " Language Specific
+  "
+
+    " G
+      Plugin 'fatih/vim-go'
+    " JavaScript
+      Plugin 'git://github.com/pangloss/vim-javascript.git'
+      Plugin 'jelera/vim-javascript-syntax'
+      Plugin 'git://github.com/maksimr/vim-jsbeautify.git'
+      Plugin 'git://github.com/posva/vim-vue'
+    " Ruby
+      " Wisely add "end" in ruby, endfunction/endif/more
+      Plugin 'git://github.com/tpope/vim-endwise.git'
+
 set background=dark
 set backspace=indent,eol,start " backspace over eol, indents, and start of insets
 
 " Interface
+
   set history=1000  " store command history
   set number        " show line numbers
   set showmatch     " show matching brackets
