@@ -16,9 +16,11 @@ Plugin 'VundleVim/Vundle.vim'
 "
   " General
 
-  " Color Schemes
+    " Git
+    Plugin 'git://github.com/tpope/vim-fugitive.git'
+
+    " Color Schemes
     Plugin 'flazz/vim-colorschemes'
-    colorscheme railscasts
 
     " Provides easy code commenting
     Plugin 'git://github.com/tomtom/tcomment_vim'
@@ -63,10 +65,23 @@ Plugin 'VundleVim/Vundle.vim'
       " Wisely add "end" in ruby, endfunction/endif/more
       Plugin 'git://github.com/tpope/vim-endwise.git'
 
-set background=dark
 set backspace=indent,eol,start " backspace over eol, indents, and start of insets
 
 " Interface
+  syntax enable
+  set background=dark
+  colorscheme railscasts
+
+"
+"
+  filetype indent on  " load filetype-specific indent files
+  set cursorline      " highlight current line
+  set wildmenu            " visual autocomplete for command menu
+  set lazyredraw          " redraw only when we need to
+  set foldenable          " enable folding
+  hi CursorLine   cterm=NONE ctermbg=240 ctermfg=NONE
+"
+"
 
   set history=1000  " store command history
   set number        " show line numbers
@@ -93,8 +108,6 @@ set backspace=indent,eol,start " backspace over eol, indents, and start of inset
   set ignorecase " ignore case in seaches
   set smartcase " override 'ignorecase' if seach contains uppercase characters
 
-" Syntax
-  syntax enable
 
 call vundle#end()
 filetype plugin indent on
