@@ -15,6 +15,10 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugins
 "
   " General
+    " Auto completion engine
+    Plugin 'Shougo/deoplete.nvim'
+    Plugin 'roxma/nvim-yarp'
+    Plugin 'roxma/vim-hug-neovim-rpc'
 
     " Git
     Plugin 'git://github.com/tpope/vim-fugitive.git'
@@ -30,6 +34,7 @@ Plugin 'VundleVim/Vundle.vim'
 
     " Status Bar
     Plugin 'git://github.com/bling/vim-airline.git'
+    let g:airline#extensions#syntatic#enabled=1
 
     " NERDTree
       " Tree file browsing
@@ -56,6 +61,8 @@ Plugin 'VundleVim/Vundle.vim'
 
     " G
       Plugin 'fatih/vim-go'
+      Plugin 'zchee/deoplete-go'
+
     " JavaScript
       Plugin 'git://github.com/pangloss/vim-javascript.git'
       Plugin 'jelera/vim-javascript-syntax'
@@ -112,3 +119,34 @@ set backspace=indent,eol,start " backspace over eol, indents, and start of inset
 call vundle#end()
 filetype plugin indent on
 
+
+
+
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#sources#syntax#min_keyword_length = 3
+
+" " Plugin key-mappings.
+inoremap <expr><C-g> deoplete#undo_completion()
+inoremap <expr><C-l> deoplete#complete_common_string()
+"
+" " Recommended key-mappings.
+" " <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  if pumvisible()
+     return deoplete#close_popup()
+   else
+     return "\<CR>"
+   endif
+ endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> deoplete#close_popup()
+inoremap <expr><C-e> deoplete#cancel_popup()
