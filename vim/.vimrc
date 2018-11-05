@@ -150,3 +150,6 @@ inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y> deoplete#close_popup()
 inoremap <expr><C-e> deoplete#cancel_popup()
+set completeopt-=preview
+
+set cmdheight=2
