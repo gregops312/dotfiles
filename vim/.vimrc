@@ -19,6 +19,31 @@ Plugin 'VundleVim/Vundle.vim'
     Plugin 'Shougo/deoplete.nvim'
     Plugin 'roxma/nvim-yarp'
     Plugin 'roxma/vim-hug-neovim-rpc'
+      let g:deoplete#enable_at_startup = 1
+      let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+      let g:deoplete#enable_smart_case = 1
+      let g:deoplete#sources#syntax#min_keyword_length = 3
+      " Plugin key-mappings.
+      inoremap <expr><C-g> deoplete#undo_completion()
+      inoremap <expr><C-l> deoplete#complete_common_string()
+      " Recommended key-mappings.
+      " <CR>: close popup and save indent.
+      inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+      function! s:my_cr_function()
+        if pumvisible()
+          return deoplete#close_popup()
+        else
+          return "\<CR>"
+        endif
+      endfunction
+      " <TAB>: completion.
+      inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+      " <C-h>, <BS>: close popup and delete backword char.
+      inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+      inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
+      inoremap <expr><C-y> deoplete#close_popup()
+      inoremap <expr><C-e> deoplete#cancel_popup()
+      set completeopt-=preview
 
     " Git
     Plugin 'git://github.com/tpope/vim-fugitive.git'
@@ -87,6 +112,7 @@ set backspace=indent,eol,start " backspace over eol, indents, and start of inset
   set lazyredraw          " redraw only when we need to
   set foldenable          " enable folding
   hi CursorLine   cterm=NONE ctermbg=240 ctermfg=NONE
+  set cmdheight=2
 "
 "
 
@@ -119,37 +145,3 @@ set backspace=indent,eol,start " backspace over eol, indents, and start of inset
 call vundle#end()
 filetype plugin indent on
 
-
-
-
-
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#sources#syntax#min_keyword_length = 3
-
-" " Plugin key-mappings.
-inoremap <expr><C-g> deoplete#undo_completion()
-inoremap <expr><C-l> deoplete#complete_common_string()
-"
-" " Recommended key-mappings.
-" " <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  if pumvisible()
-     return deoplete#close_popup()
-   else
-     return "\<CR>"
-   endif
- endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> deoplete#close_popup()
-inoremap <expr><C-e> deoplete#cancel_popup()
-set completeopt-=preview
-
-set cmdheight=2
