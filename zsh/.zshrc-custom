@@ -1,7 +1,11 @@
 # Ruby
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
 
-alias ruby-setup='~/.programs/ruby-setup.sh'
+ruby_setup () {
+  echo "mkdir dirname"
+  echo "dirname = dirname/.ruby-gemset"
+  echo "cd dirname"
+  echo "source 'https://rubygems.org'\n\ngem 'byebug' = Gemfile "
+  echo "gem install bundler --no-ri --no-rdoc"
+  echo "bundle install"
+}
 
-chruby ruby-2.5.0
