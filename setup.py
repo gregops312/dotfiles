@@ -32,22 +32,24 @@ def bash():
         shutil.copyfile("bash/.bash_profile", f'{user_home}/.bash_profile')
         shutil.copyfile("bash/.bashrc", f'{user_home}/.bashrc')
 
-def my_programs():
-    logger.info("Setting up my programs")
-    subprocess.run(['mkdir', '-p', f'{user_home}/.programs'])
-    shutil.copy2("programs/ruby-setup.sh", f'{user_home}/.programs/ruby-setup.sh')
 
 def setup(program_list):
     if 'bash' in program_list:
         bash()
     if 'my_programs' in program_list:
-        my_programs()
+        scripts()
     if 'tmux' in program_list:
         tmux()
     if 'vim' in program_list:
         vim()
     if 'zsh' in program_list:
         zsh()
+
+
+def scripts():
+    logger.info("Setting up my scripts")
+    subprocess.run(['mkdir', '-p', f'{user_home}/bin'])
+    shutil.copy2("scripts/ruby-setup.sh", f'{user_home}/bin/setup_ruby')
 
 
 def tmux():

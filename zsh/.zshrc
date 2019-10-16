@@ -2,7 +2,7 @@ source ~/.zshrc-custom
 
 export ZSH=~/.oh-my-zsh
 export GOPATH=~/code/gocode
-export PATH=$PATH:~/code/gocode/bin
+export PATH=$PATH:~/bin:~/code/gocode/bin
 autoload -U colors && colors
 autoload -U promptinit
 promptinit
