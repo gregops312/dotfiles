@@ -1,8 +1,3 @@
-# Auto Completion
-bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
-
-
 git='%{$fg_bold[blue]%}$(git_prompt_info)%'
 user_host="%n%D{@}%m"
 date_time="${fg[red]%}%W-%T%"
