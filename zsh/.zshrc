@@ -2,7 +2,7 @@ source ~/.zshrc-custom
 
 export ZSH=~/.oh-my-zsh
 export GOPATH=~/code/gocode
-export PATH=$PATH:~/code/gocode/bin
+export PATH=$PATH:~/bin:~/code/gocode/bin
 autoload -U colors && colors
 autoload -U promptinit
 promptinit
@@ -28,5 +28,5 @@ fi
 # Set theme in ~/.oh-my-zsh/themes/
 ZSH_THEME="greg-kman"
 
-plugins=(bash bundler completion chruby docker git gradle kitchen knife kubectl mvn node python rake ruby sudo zsh)
+plugins=(bash bundler completion docker git gradle kitchen knife kubectl mvn node python rake ruby sudo zsh)
 source "$ZSH/oh-my-zsh.sh"

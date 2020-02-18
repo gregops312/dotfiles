@@ -9,6 +9,7 @@ handle_directory() {
   else
     mkdir $dir_name || echo "$dir_name already exists"
     cd $dir_name
+    echo $dir_name > ".ruby-gemset"
   fi
 }
 
@@ -36,6 +37,7 @@ set_ruby_version() {
   read version
   echo "${version}" > .ruby-version
 }
+
 
 ruby_installed
 handle_directory
