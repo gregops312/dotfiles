@@ -128,11 +128,12 @@ filetype plugin indent on
 ""
 "" File Tree Config
 ""
+  "map <C-n> :NERDTreeToggle<CR>
   noremap <silent> <C-e> :NERDTreeToggle<CR>:silent NERDTreeMirror<CR>
   map <silent> <C-d> :1<CR>X
   " let NERDTreeShowBookmarks=1
   let NERDTreeChDirMode=2
-  let NERDTreeQuitOnOpen=1
+  let NERDTreeQuitOnOpen=0
   let NERDTreeShowHidden=1
   let NERDTreeKeepTreeInNewTab=0
   " Disable display of the 'Bookmarks' label and 'Press ? for help' text
@@ -140,3 +141,11 @@ filetype plugin indent on
   " Use arrows instead of + ~ chars when displaying directories
   let NERDTreeDirArrows=1
   " let NERDTreeBookmarksFile= $HOME . '/.vim/.NERDTreeBookmarks'
+  let g:NERDTreeDirArrowExpandable = '▸'
+  let g:NERDTreeDirArrowCollapsible = '▾'
+
+""
+"" Go
+""
+let g:go_fmt_command = "goimports"
+
