@@ -28,5 +28,5 @@ fi
 # Set theme in ~/.oh-my-zsh/themes/
 ZSH_THEME="greg-kman"
 
-plugins=(bash bundler completion docker git gradle kitchen knife kubectl mvn node python rake ruby sudo zsh)
+plugins=(bundler docker git gradle kitchen knife kubectl mvn node python rake ruby sudo)
 source "$ZSH/oh-my-zsh.sh"
