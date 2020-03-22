@@ -38,7 +38,6 @@ set_ruby_version() {
   echo "${version}" > .ruby-version
 }
 
-
 ruby_installed
 handle_directory
 set_ruby_version

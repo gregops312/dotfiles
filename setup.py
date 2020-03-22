@@ -1,5 +1,5 @@
-#!/usr/bin/env python3.6
-# import argparse
+#!/usr/bin/env python3
+
 import logging
 import glob
 import platform
@@ -15,6 +15,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 logger.setLevel('INFO')
 user_home = expanduser("~")
+work = False
 
 
 def check_app(app):
@@ -49,7 +50,7 @@ def setup(program_list):
 def scripts():
     logger.info("Setting up my scripts")
     subprocess.run(['mkdir', '-p', f'{user_home}/bin'])
-    shutil.copy2("scripts/ruby-setup.sh", f'{user_home}/bin/setup_ruby')
+    shutil.copy2("scripts/ruby-setup.sh", f'{user_home}/bin/ruby_setup')
 
 
 def tmux():
@@ -80,11 +81,25 @@ def zsh():
     if check_app('zsh'):
         logger.info("Setting up Zsh")
         shutil.copyfile("zsh/.zshrc", f'{user_home}/.zshrc')
+        if work:
+            with open(f'{user_home}/.zshrc', "a") as myfile:
+                myfile.write(f'source "{user_home}/.zshrc-work"')
         shutil.copyfile("zsh/.zshrc-custom", f'{user_home}/.zshrc-custom')
         shutil.copyfile("zsh/greg-kman.zsh-theme", f'{user_home}/.oh-my-zsh/themes/greg-kman.zsh-theme')
 
 
+def yes_or_no():
+    reply = str(input('Work machine (y/n): ')).lower().strip()
+    if reply[0] == 'y':
+        return True
+    if reply[0] == 'n':
+        return False
+    else:
+        return yes_or_no()
+
+
 def main():
+    work = yes_or_no()
     if platform.system() == "Darwin":
         logger.info("Mac OSx found")
         setup(['bash', 'my_programs', 'tmux', 'vim', 'zsh'])

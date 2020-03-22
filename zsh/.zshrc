@@ -7,26 +7,11 @@ autoload -U colors && colors
 autoload -U promptinit
 promptinit
 
-alias ussh='ssh -oStrictHostKeyChecking=no'
-
 alias cl='clear'
-
-# Docker
-dockerc='which docker-compose'
-if [ "$dockerc" != 'docker-compose not found' ]; then
-        alias dc='docker-compose'
-fi
-
-# if [ "$HOST" == 'server-centos' ]; then
-    alias web-edit="/etc/httpd/conf/httpd.conf"
-    alias web-start="service httpd start"
-    alias plex-start="sudo systemctl start plexmediaserver.service"
-    alias plex-stop="sudo systemctl stop plexmediaserver.service"
-    alias plex-disable-firewall="sudo systemctl stop firewalld.service"
-# fi
 
 # Set theme in ~/.oh-my-zsh/themes/
 ZSH_THEME="greg-kman"
 
-plugins=(bundler docker git gradle kitchen knife kubectl mvn node python rake ruby sudo)
+plugins=(alias-finder ansible autojump aws battery brew bundler colored-man-pages colorize docker docker-compose encode64 extract git git-auto-fetch git-prompt gitignore golang gradle kitchen knife kubectl mvn node npm osx python rake ruby rvm sudo terraform tmux ubuntu vagrant vault vscode)
+
 source "$ZSH/oh-my-zsh.sh"
