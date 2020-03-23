@@ -1,6 +1,9 @@
 # Need to fix git tracking stuff
 # Need to fix git color stuff
 
+# Battery
+# $(battery_pct_prompt)
+
 local git='%{$fg_bold[blue]%}$(git_prompt_info)%'
 local user_host="%n%D{@}%m"
 local date_time="${fg[red]%}%W-%T%"
