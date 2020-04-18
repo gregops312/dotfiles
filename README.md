@@ -1,25 +1,8 @@
-# Config Usage
+# Dotfiles
 
-## Overview
-
-This will explain what my configs do and how to use them
-
-	.bash_profile
-	.tmux.conf
-	.vimrc
-	.zshrc
-	greg-kman.zsh-theme
-
-1. Run loader.sh will
-	* cp .bash_profile ~/
-	* cp .tmux_conf ~/
-	* cp .vimrc ~/
-	* cp .zshrc ~/
-	* greg-kman.zsh-theme ~/.oh-my-zsh/themes
-
-| Features | Bash Profile | Tmux | Vim | ZSH |
-| :------: | :----------: | :--: | :-: | :-: |
-| yes | asdf | asafd | dfg | gsfdd |
+```bash
+./install
+```
 
 ## SSH key auth setup
 
@@ -35,3 +18,13 @@ logon to server and change permissions
 chmod 700 ~/.ssh
 chmod 640 ~/.ssh/authorized_keys
 ```
+
+https://github.com/pd/dotfiles/blob/master/bin/filesizes
+https://github.com/pd/dotfiles/blob/master/bin/git-delete-merged-branches
+https://github.com/pd/dotfiles/blob/master/bin/ssh-list-hosts
+https://github.com/pd/dotfiles/blob/master/shell_profile/core_aliases.sh
+https://github.com/pd/dotfiles/blob/master/shell_profile/completion.sh
+https://github.com/pd/dotfiles/blob/master/Brewfile
+https://github.com/pd/dotfiles/blob/master/gitconfig
+https://github.com/pd/dotfiles/blob/master/zshrc
+https://github.com/pd/homebrew-brewfile/blob/master/Brewfile

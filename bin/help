@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+clear
+
+echo "Bash"
+https://wiki-dev.bash-hackers.org/start
+
+
+echo "ElasticSearch"
+echo "tsh ssh -L 9200:es.production.emd.uptake.com:9200 centos@10.135.8.254"
+
+echo
+
+echo "OpenSSL TLS/SSL Certs"
+echo "openssl x509 -in qa.emd/file  -noout -issuer -subject"
+
+echo
+
+echo "Vim"
+https://stackoverflow.com/questions/1879219/how-to-temporarily-exit-vim-and-go-back
+
+
+:sh
+:set shell?
+:!bash
+:! <command>
+
+
+reload nerd tree
+https://stackoverflow.com/questions/8793489/nerdtree-reload-new-files
+r for just dir
+R for root dir
