@@ -27,7 +27,7 @@ check_link() {
   else
     # check if the item has 2 links to it,
     # indictating it is a file that has a hard link to it
-    if [[ $(stat -f "%l" ${2}) -eq 2 ]]; then
+    if [[ $(stat --format '%h' ${2}) -eq 2 ]]; then
       echo "linked:skipped: ${2}"
     # If file exists
     elif [[ -e "${2}" ]]; then
