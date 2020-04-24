@@ -17,16 +17,16 @@ echo "openssl x509 -in qa.emd/file  -noout -issuer -subject"
 echo
 
 echo "Vim"
-https://stackoverflow.com/questions/1879219/how-to-temporarily-exit-vim-and-go-back
+#https://stackoverflow.com/questions/1879219/how-to-temporarily-exit-vim-and-go-back
 
 
-:sh
-:set shell?
-:!bash
-:! <command>
+#:sh
+#:set shell?
+#:!bash
+#:! <command>
 
 
-reload nerd tree
-https://stackoverflow.com/questions/8793489/nerdtree-reload-new-files
-r for just dir
-R for root dir
+#reload nerd tree
+#https://stackoverflow.com/questions/8793489/nerdtree-reload-new-files
+#r for just dir
+#R for root dir
