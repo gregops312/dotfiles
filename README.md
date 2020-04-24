@@ -4,6 +4,15 @@
 ./install
 ```
 
+## TODO
+
+* need to check for linux/darwin
+stat/gstat
+stat --format '%h' ~/.zshrc
+vs
+stat -f "%l" ~/.zshrc
+  needs to be gstat and above
+
 ## SSH key auth setup
 
 copy key to server with
