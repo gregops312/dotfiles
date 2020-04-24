@@ -51,12 +51,12 @@ vim_setup() {
   mkdir -p "${HOME}"/.vim/colors
   vim +PluginInstall +qall
 
-  if [ -f "${HOME}"/.vim/bundle/vim-colorschemes/colors/* ]; then
+  if [[ -f "${HOME}"/.vim/bundle/vim-colorschemes/colors/* ]]; then
    mv "${HOME}"/.vim/bundle/vim-colorschemes/colors/* \
     "${HOME}"/.vim/colors
   fi
 
-  if [ -f "${HOME}"/.vim/bundle/vim-railscasts-theme/colors/* ]; then
+  if [[ -f "${HOME}"/.vim/bundle/vim-railscasts-theme/colors/* ]]; then
     mv "${HOME}"/.vim/bundle/vim-railscasts-theme/colors/* \
       "${HOME}"/.vim/colors
   fi
