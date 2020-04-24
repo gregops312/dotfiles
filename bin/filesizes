@@ -1,0 +1,9 @@
+#!/bin/sh
+# Because I can never remember how to sort `du -h`.
+
+# `brew install coreutils`, which installs `gsort`
+if [ $# -lt 1 ]; then
+  du -h -d 1 * | sort -h | tail -n 10
+else
+  du -h -d 1 "$@" | sort -h | tail -n 10
+fi
