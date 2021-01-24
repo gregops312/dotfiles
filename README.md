@@ -16,6 +16,7 @@ https://www.google.com/search?sxsrf=ALeKk02KoQ1WZjUbBc1cNpaoTJ1h8hfmwQ%3A1587699
 * https://github.com/pd/dotfiles/blob/master/zshrc
 * https://github.com/pd/homebrew-brewfile/blob/master/Brewfile
 
+
 ## SSH key auth setup
 
 copy key to server with
