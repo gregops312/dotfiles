@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # Because I can never remember how to sort `du -h`.
 
 # `brew install coreutils`, which installs `gsort`
