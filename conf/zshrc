@@ -10,6 +10,9 @@ alias cl='clear'
 # Set theme in ~/.oh-my-zsh/themes/
 ZSH_THEME="greg-kman"
 
+# https://github.com/wting/autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
 # Setups up notifications with the use of bgnotify plugin
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/bgnotify
 bgnotify_threshold=7  # Notification threshold in seconds
@@ -26,6 +29,8 @@ source "$ZSH/oh-my-zsh.sh"
 if [[ $(uname) == "Darwin" ]]; then
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
+
+eval "$(direnv hook zsh)"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
