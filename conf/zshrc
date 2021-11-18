@@ -1,9 +1,28 @@
+export SHOW_AWS_PROMPT=false
 export ZSH=~/.oh-my-zsh
 export GOPATH=~/code/gocode
 export PATH=$PATH:~/bin:~/code/gocode/bin
 autoload -U colors && colors
 autoload -U promptinit
 promptinit
+
+###
+### TODO
+###
+# ## turn on expanded tabcomplete
+# autoload -U compinit
+# compinit
+
+# ## and support some bash completion scripts too
+# autoload -U bashcompinit
+# bashcompinit
+
+# ## allows $fg[white], $bg[red], $terminfo[bold]
+# autoload colors zsh/terminfo
+# colors
+###
+### TODO
+###
 
 alias cl='clear'
 
@@ -22,7 +41,7 @@ function bgnotify_formatted {
   bgnotify "$title -- after $3 s" "$2";
 }
 
-plugins=(alias-finder ansible autojump aws battery bgnotify brew bundler colored-man-pages colorize docker docker-compose encode64 extract git git-auto-fetch git-prompt gitignore golang gradle kitchen knife kubectl mvn node npm osx python rake ruby rvm sudo terraform tmux ubuntu vagrant vault vscode)
+plugins=(alias-finder ansible autojump aws battery bgnotify brew bundler colored-man-pages colorize docker docker-compose encode64 extract git git-auto-fetch git-prompt gitignore golang gradle kitchen knife kubectl macos mvn node npm python rake ruby rvm sudo terraform tmux ubuntu vagrant vault vscode)
 
 source "$ZSH/oh-my-zsh.sh"
 

@@ -1,43 +1,100 @@
 #!/usr/bin/env bash
 
-clear
+set -euo pipefail
 
-echo "Bash"
-https://wiki-dev.bash-hackers.org/start
+main() {
+  while getopts besvz opt; do
+    case "${opt}" in
+      b) bash;;
+      e) elasticsearch;;
+      s) ssl;;
+      v) vim;;
+      z) zsh;;
+      *)  usage; exit 1;;
+    esac
+  done
 
+  if [ $OPTIND -eq 1 ]; then 
+    usage
+    exit 1
+  fi
+}
 
-echo "ElasticSearch"
-echo "tsh ssh -L 9200:es.production.emd.uptake.com:9200 centos@10.135.8.254"
+bash() {
+  echo "Bash
+  https://wiki-dev.bash-hackers.org/start
+  "
+}
 
-echo
+elasticsearch() {
+  echo "ElasticSearch
+  tsh ssh -L 9200:es.production.emd.uptake.com:9200 centos@10.135.8.254
+  "
+}
 
-echo "OpenSSL TLS/SSL Certs"
-echo "openssl x509 -in qa.emd/file  -noout -issuer -subject"
+misc() {
+  echo "
+  ix
+  
+  ix is a command-line pastebin. You don't need to install anything; you can create new pastes just by curling to the ix.io site. For example, echo Hello world. | curl -F 'f:1=<-' ix.io will give you a link to ix.io where the message "Hello world" is pasted. This is very convenient when you want to share logs for debugging purposes or to save config files in servers where you don't have a desktop environment.
+  One downside is that the source code is not yet published, even though it is intended to be free and open source. If you are the author and are reading this post, please post the code so that we can contribute to the polishing process.
 
-echo
+  asciinema
+  "
+}
 
-echo "Vim"
-#https://stackoverflow.com/questions/1879219/how-to-temporarily-exit-vim-and-go-back
+ssl() {
+  echo "OpenSSL TLS/SSL Certs
+  openssl x509 -in qa.emd/file  -noout -issuer -subject
+  "
+}
 
+usage () {
+  cat <<EOF
+  Usage: $(basename $0) [-b | -e | -s | -v | -z]
+    -b: Bash
+    -e: ElasticSearch
+    -s: SSL
+    -v: Vim
+    -z: Zsh
+EOF
+}
 
-#:sh
-#:set shell?
-#:!bash
-#:! <command>
+vim() {
+  echo "Vim
+  https://stackoverflow.com/questions/1879219/how-to-temporarily-exit-vim-and-go-back
+  :sh
+  :set shell?
+  :!bash
+  :! <command>
 
+  reload nerd tree
+  https://stackoverflow.com/questions/8793489/nerdtree-reload-new-files
+  r for just dir
+  R for root dir
+  "
 
-#reload nerd tree
-#https://stackoverflow.com/questions/8793489/nerdtree-reload-new-files
-#r for just dir
-#R for root dir
+}
 
+zsh() {
+  echo "ZSH Helpers
 
-# ix
+  asp <profile> # Sets current profile
+  aws_profiles  # Lists profiles
 
-# ix is a command-line pastebin. You don't need to install anything; you can create new pastes just by curling to the ix.io site. For example, echo Hello world. | curl -F 'f:1=<-' ix.io will give you a link to ix.io where the message "Hello world" is pasted. This is very convenient when you want to share logs for debugging purposes or to save config files in servers where you don't have a desktop environment.
+  Git
+  gco   # git checkout
+  gfa   # git fetch --all --prune
+  gl    # git pull
+  gbD   # git branch -D
+  gcb   # git checkout -b
+  grbi  # git rebase -i
 
-# One downside is that the source code is not yet published, even though it is intended to be free and open source. If you are the author and are reading this post, please post the code so that we can contribute to the polishing process.
+  Git Ignore
+  gi list                         # List all the currently supported gitignore.io templates.
+  gi [TEMPLATENAME]               # Show git-ignore output on the command line, e.g. gi java to exclude class and package files.
+  gi [TEMPLATENAME] >> .gitignore # Appending programming language settings to your projects .gitignore.
+  "
+}
 
-
-
-# asciinema
+main $@
