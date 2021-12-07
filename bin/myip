@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+
+dig +short myip.opendns.com @resolver1.opendns.com
