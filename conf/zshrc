@@ -1,4 +1,5 @@
 export SHOW_AWS_PROMPT=false
+export TFENV_AUTO_INSTALL=true
 export ZSH=~/.oh-my-zsh
 export GOPATH=~/code/gocode
 export PATH=$PATH:~/bin:~/code/gocode/bin
@@ -46,7 +47,7 @@ plugins=(alias-finder ansible autojump aws battery bgnotify brew bundler colored
 source "$ZSH/oh-my-zsh.sh"
 
 if [[ $(uname) == "Darwin" ]]; then
-  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
 eval "$(direnv hook zsh)"

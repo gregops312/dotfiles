@@ -23,11 +23,11 @@ noisy_link() {
 
 check_link() {
   if ! [[ -e ${2} ]]; then
-    noisy_link ${1} ${2}
+    noisy_link "${1}" "${2}"
   else
     # check if the item has 2 links to it,
     # indictating it is a file that has a hard link to it
-    if [[ $(stat --format '%h' ${2}) -eq 2 ]]; then
+    if [[ $(stat --format '%h' "${2}") -eq 2 ]]; then
       echo "linked:skipped: ${2}"
     # If file exists
     elif [[ -e "${2}" ]]; then
@@ -38,7 +38,7 @@ check_link() {
 
 check_sym_link() {
   if ! [[ -e ${2} ]]; then
-    sym_link ${1} ${2}
+    sym_link "${1}" "${2}"
   elif [[ -L ${2} ]];then
     echo "linked:skipped: ${2}"
   else
@@ -63,7 +63,7 @@ vim_setup() {
 }
 
 work_check() {
-  read -p "Work machine (y/n)? " choice
+  read -r -p "Work machine (y/n)? " choice
   case "$choice" in 
     y|Y ) WORK=true;;
     n|N ) WORK=false;;
@@ -78,7 +78,7 @@ main() {
   # Hard link all config files
   for i in "${CONFIGS[@]}"; do
     if [[ "${i}" == *"greg-kman.zsh-theme"* ]]; then
-      check_link  "conf/${i}" ${HOME}/.oh-my-zsh/themes/greg-kman.zsh-theme
+      check_link  "conf/${i}" "${HOME}/.oh-my-zsh/themes/greg-kman.zsh-theme"
       continue
     fi
     check_link "conf/${i}" "${HOME}/.${i}"
