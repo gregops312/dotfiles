@@ -11,31 +11,31 @@ Plugin 'VundleVim/Vundle.vim'
   Plugin 'roxma/nvim-yarp'
   Plugin 'roxma/vim-hug-neovim-rpc'
 " Git
-  Plugin 'git://github.com/tpope/vim-fugitive.git'
+  Plugin 'tpope/vim-fugitive.git'
 " Color Schemes
   Plugin 'flazz/vim-colorschemes'
 " Provides easy code commenting
-  Plugin 'git://github.com/tomtom/tcomment_vim'
+  Plugin 'tomtom/tcomment_vim'
 " Fuzzy finder
   Plugin 'kien/ctrlp.vim'
 " Status Bar
-  Plugin 'git://github.com/bling/vim-airline.git'
+  Plugin 'bling/vim-airline.git'
 let g:airline#extensions#syntatic#enabled=1
 " Tree file browsing
-  Plugin 'git://github.com/scrooloose/nerdtree.git'
+  Plugin 'scrooloose/nerdtree.git'
 " Automatic closing of quotes, parenthesis, brackets, etc.
-  Plugin 'git://github.com/vim-scripts/delimitMate.vim.git'
+  Plugin 'vim-scripts/delimitMate.vim.git'
 " Go
   Plugin 'fatih/vim-go'
   Plugin 'zchee/deoplete-go'
 " JavaScript
-  Plugin 'git://github.com/pangloss/vim-javascript.git'
+  Plugin 'pangloss/vim-javascript.git'
   Plugin 'jelera/vim-javascript-syntax'
-  Plugin 'git://github.com/maksimr/vim-jsbeautify.git'
-  Plugin 'git://github.com/posva/vim-vue'
+  Plugin 'maksimr/vim-jsbeautify.git'
+  Plugin 'posva/vim-vue'
 " Ruby
   " Wisely add "end" in ruby, endfunction/endif/more
-  Plugin 'git://github.com/tpope/vim-endwise.git'
+  Plugin 'tpope/vim-endwise.git'
 " Terraform
   Plugin 'hashivim/vim-terraform'
 
