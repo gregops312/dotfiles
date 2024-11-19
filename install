@@ -46,6 +46,12 @@ check_sym_link() {
   fi
 }
 
+oh_my_zsh() {
+  if ! [[ -d "${HOME}/.oh-my-zsh" ]]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  fi
+}
+
 vim_setup() {
   install_vim_vundle
   mkdir -p "${HOME}"/.vim/colors
@@ -74,6 +80,7 @@ work_check() {
 main() {
   # Ask if this is my work machine
   work_check
+  oh_my_zsh
 
   # Hard link all config files
   for i in "${CONFIGS[@]}"; do
