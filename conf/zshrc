@@ -25,7 +25,23 @@ promptinit
 ### TODO
 ###
 
+##
+## General
+##
 alias cl='clear'
+
+##
+## Terraform
+##
+alias tfg="terraform get -update"
+alias tfi="terraform init"
+alias tfu="terraform init -upgrade"
+alias tfimp="terraform import"
+alias tfp="terraform plan -parallelism 250 -out tfplan"
+alias tfip="terraform init && terraform plan -parallelism 250 -out tfplan"
+alias tfa="terraform apply -parallelism 250 \"tfplan\""
+alias tfv="terraform version"
+alias tff="terraform fmt -recursive $(git rev-parse --show-toplevel)"
 
 # Set theme in ~/.oh-my-zsh/themes/
 ZSH_THEME="greg-kman"
