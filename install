@@ -75,6 +75,11 @@ main() {
   # Ask if this is my work machine
   work_check
 
+  # Install oh-my-zsh
+  if [[ -z "${ZSH:-}" ]]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  fi
+
   # Hard link all config files
   for i in "${CONFIGS[@]}"; do
     if [[ "${i}" == *"greg-kman.zsh-theme"* ]]; then
