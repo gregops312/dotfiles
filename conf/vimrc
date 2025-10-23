@@ -87,8 +87,8 @@ set backspace=indent,eol,start " backspace over eol, indents, and start of inset
     set lcs=tab:-<,trail:.,extends:>,precedes:<
 
 " Search
-  set ignorecase " ignore case in seaches
-  set smartcase " override 'ignorecase' if seach contains uppercase characters
+  set ignorecase " ignore case in searches
+  set smartcase " override 'ignorecase' if search contains uppercase characters
 
 ""
 "" Begin New Config
@@ -118,7 +118,7 @@ filetype plugin indent on
   endfunction
   " <TAB>: completion.
   inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-  " <C-h>, <BS>: close popup and delete backword char.
+  " <C-h>, <BS>: close popup and delete backward char.
   inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
   inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
   inoremap <expr><C-y> deoplete#close_popup()
@@ -148,4 +148,3 @@ filetype plugin indent on
 "" Go
 ""
 let g:go_fmt_command = "goimports"
-

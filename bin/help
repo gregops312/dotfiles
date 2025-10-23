@@ -14,7 +14,7 @@ main() {
     esac
   done
 
-  if [ $OPTIND -eq 1 ]; then 
+  if [ $OPTIND -eq 1 ]; then
     usage
     exit 1
   fi
@@ -36,7 +36,7 @@ elasticsearch() {
 misc() {
   echo "
   ix
-  
+
   ix is a command-line pastebin. You don't need to install anything; you can create new pastes just by curling to the ix.io site. For example, echo Hello world. | curl -F 'f:1=<-' ix.io will give you a link to ix.io where the message "Hello world" is pasted. This is very convenient when you want to share logs for debugging purposes or to save config files in servers where you don't have a desktop environment.
   One downside is that the source code is not yet published, even though it is intended to be free and open source. If you are the author and are reading this post, please post the code so that we can contribute to the polishing process.
 
