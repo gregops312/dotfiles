@@ -2,12 +2,24 @@
 
 set -eu
 
-CONFIGS=( $(ls conf) )
+mapfile -t CONFIGS < <(ls conf)
 WORK=false
+
+install_oh_my_zsh() {
+  if ! [[ -d "${HOME}/.oh-my-zsh" ]]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  fi
+}
+
+install_starship() {
+  if ! command -v starship >/dev/null 2>&1; then
+    curl -sS https://starship.rs/install.sh | sh
+  fi
+}
 
 install_vim_vundle() {
   if ! [[  -d "${HOME}/.vim/bundle/Vundle.vim" ]]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   fi
 }
 
@@ -25,6 +37,17 @@ check_link() {
   if ! [[ -e ${2} ]]; then
     noisy_link "${1}" "${2}"
   else
+    # if [[ $(uname) == "Darwin" ]]; then
+    #   echo "macOS detected"
+    #   # stat -f '%l' "${2}"
+    # elif [[ $(uname) == "Linux" ]]; then
+    #   echo "Linux detected"
+    #   # stat --format '%h' "${2}"
+    # else
+    #   echo "Unsupported OS: $(uname)"
+    #   exit 1
+    # fi
+
     # check if the item has 2 links to it,
     # indictating it is a file that has a hard link to it
     if [[ $(stat --format '%h' "${2}") -eq 2 ]]; then
@@ -64,7 +87,7 @@ vim_setup() {
 
 work_check() {
   read -r -p "Work machine (y/n)? " choice
-  case "$choice" in 
+  case "$choice" in
     y|Y ) WORK=true;;
     n|N ) WORK=false;;
     * ) work_check;;
@@ -74,16 +97,18 @@ work_check() {
 main() {
   # Ask if this is my work machine
   work_check
-
-  # Install oh-my-zsh
-  if [[ -z "${ZSH:-}" ]]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  fi
+  install_oh_my_zsh
+  install_starship
 
   # Hard link all config files
   for i in "${CONFIGS[@]}"; do
     if [[ "${i}" == *"greg-kman.zsh-theme"* ]]; then
       check_link  "conf/${i}" "${HOME}/.oh-my-zsh/themes/greg-kman.zsh-theme"
+      continue
+    fi
+    if [[ "${i}" == *"starship.toml"* ]]; then
+      mkdir -p "${HOME}/.config"
+      check_link  "conf/${i}" "${HOME}/.config/starship.toml"
       continue
     fi
     check_link "conf/${i}" "${HOME}/.${i}"
@@ -98,4 +123,4 @@ main() {
   source ~/.zshrc
 }
 
-main
+main "$@"

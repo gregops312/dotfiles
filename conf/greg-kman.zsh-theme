@@ -1,10 +1,15 @@
 # https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
 
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-prompt
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git-prompt/git-prompt.plugin.zsh
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/kube-ps1
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/starship
+# https://starship.rs/presets/
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/zsh-interactive-cd
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/zsh-navigation-tools
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
 
-ZSH_THEME_AWS_PREFIX="(aws:"
-ZSH_THEME_AWS_SUFFIX=")"
 ZSH_THEME_GIT_PROMPT_PREFIX="git:(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗%{$reset_color%}"

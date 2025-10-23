@@ -1,0 +1,77 @@
+# https://starship.rs/config/
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+format = """
+$username\
+$hostname\
+$memory_usage\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$aws \
+$kubernetes
+$directory\
+$character
+"""
+
+[aws]
+format = '[\[$symbol($profile) @ ($region)\]]($style)'
+# symbol = 'AWS:'
+symbol = '☁️ '
+style = 'bold yellow'
+[aws.region_aliases]
+eu-west-1 = 'ew1'
+us-east-1 = 'ue1'
+us-west-2 = 'uw2'
+[aws.profile_aliases]
+# CompanyGroupFrobozzOnCallAccess = 'Frobozz'
+
+[directory]
+truncation_length = 5
+truncation_symbol = '.../'
+
+[git_branch]
+always_show_remote = true
+format = '\[[$symbol($branch)]($style)\]'
+style = 'bold purple'
+
+# Disabled
+[git_commit]
+commit_hash_length = 3
+format = '[\($hash $tag\)]($style) '
+style = 'bold green'
+only_detached = false
+tag_disabled = false
+disabled = true
+
+[git_metrics]
+disabled = false
+format = '\[([+$added]($added_style)) 𝝙 ([-$deleted]($deleted_style))\]'
+only_nonzero_diffs = false
+
+[hostname]
+format ="[$ssh_symbol$hostname]($style)\\]"
+style = 'bold blue'
+ssh_only = false
+disabled = false
+
+[kubernetes]
+disabled = false
+format = '[$symbol$context( \($namespace\))]($style)'
+
+[memory_usage]
+disabled = false
+format = '\[$symbol[${ram}( | ${swap})]($style)\]'
+threshold = 5
+
+[username]
+format = '\[[$user]($style)@'
+show_always = true
+style_user = 'bold blue'
