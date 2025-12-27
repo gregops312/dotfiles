@@ -1,19 +1,39 @@
 #!/usr/bin/env bash
 
+# EX: ./install -w
+
 set -eu
+# set -x
 
 mapfile -t CONFIGS < <(ls conf)
 WORK=false
 
+install_helix() {
+  if ! command -v hx > /dev/null 2>&1; then
+    if [[ $(uname) == "Darwin" ]]; then
+      brew install helix
+    elif [[ $(uname) == "Linux" ]]; then
+      sudo add-apt-repository --yes ppa:maveonair/helix-editor
+      sudo apt-get update -y > /dev/null
+      sudo apt-get install -y helix > /dev/null
+    fi
+  fi
+}
+
 install_oh_my_zsh() {
   if ! [[ -d "${HOME}/.oh-my-zsh" ]]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended  > /dev/null
   fi
 }
 
 install_starship() {
-  if ! command -v starship >/dev/null 2>&1; then
-    curl -sS https://starship.rs/install.sh | sh
+  if ! command -v starship > /dev/null 2>&1; then
+    if [[ $(uname) == "Darwin" ]]; then
+      brew install starship
+    elif [[ $(uname) == "Linux" ]]; then
+      sudo apt-get update -y > /dev/null
+      sudo apt-get install -y starship > /dev/null
+    fi
   fi
 }
 
@@ -34,27 +54,25 @@ noisy_link() {
 }
 
 check_link() {
-  if ! [[ -e ${2} ]]; then
+  if ! [[ -e "${2}" ]]; then
     noisy_link "${1}" "${2}"
   else
-    # if [[ $(uname) == "Darwin" ]]; then
-    #   echo "macOS detected"
-    #   # stat -f '%l' "${2}"
-    # elif [[ $(uname) == "Linux" ]]; then
-    #   echo "Linux detected"
-    #   # stat --format '%h' "${2}"
-    # else
-    #   echo "Unsupported OS: $(uname)"
-    #   exit 1
-    # fi
-
-    # check if the item has 2 links to it,
-    # indictating it is a file that has a hard link to it
-    if [[ $(stat -f '%l' "${2}") -eq 2 ]]; then
-      echo "linked:skipped: ${2}"
-    # If file exists
-    elif [[ -e "${2}" ]]; then
-      echo "not-linked:exists:skipped: rm -rf ${2}"
+    if [[ $(uname) == "Darwin" ]]; then
+      if [[ $(stat -f '%l' "${2}") -eq 2 ]]; then
+        echo "linked:skipped: ${2}"
+      # If file exists
+      elif [[ -e "${2}" ]]; then
+        echo "not-linked:exists:skipped: rm -rf ${2}"
+      fi
+    elif [[ $(uname) == "Linux" ]]; then
+      if [[ $(stat --format '%h' "${2}") -eq 2 ]]; then
+        echo "linked:skipped: ${2}"
+      elif [[ -e "${2}" ]]; then
+        echo "not-linked:exists:skipped: rm -rf ${2}"
+      fi
+    else
+      echo "Unsupported OS: $(uname)"
+      exit 1
     fi
   fi
 }
@@ -69,10 +87,21 @@ check_sym_link() {
   fi
 }
 
+options() {
+  while getopts ":w" opt; do
+    case "${opt}" in
+      w)
+        WORK=true;;
+      *)
+        usage;;
+    esac
+  done
+}
+
 vim_setup() {
   install_vim_vundle
   mkdir -p "${HOME}"/.vim/colors
-  vim +PluginInstall +qall
+  vim --clean '+source ~/.vimrc' +PluginInstall +qall
 
   # shellcheck disable=SC2144
   if [[ -f "${HOME}"/.vim/bundle/vim-colorschemes/colors/* ]]; then
@@ -87,18 +116,9 @@ vim_setup() {
   fi
 }
 
-work_check() {
-  read -r -p "Work machine (y/n)? " choice
-  case "$choice" in
-    y|Y ) WORK=true;;
-    n|N ) WORK=false;;
-    * ) work_check;;
-  esac
-}
-
 main() {
-  # Ask if this is my work machine
-  work_check
+  options "$@"
+  # install_helix
   install_oh_my_zsh
   install_starship
 
@@ -125,7 +145,16 @@ main() {
     grep -qxF 'source ~/.zshrc-work' conf/zshrc || echo 'source ~/.zshrc-work' >> conf/zshrc
   fi
   # shellcheck disable=SC1090
-  source ~/.zshrc
+  # source ~/.zshrc
+  [[ $- == *i* ]] && source ~/.zshrc || true
+}
+
+usage() {
+  cat <<EOF
+  Usage: $(basename "$0") [-w]
+    -w: Is this a work machine?
+EOF
+  exit 1
 }
 
 main "$@"

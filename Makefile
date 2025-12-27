@@ -1,7 +1,19 @@
-.PHONY: test
-test:
-	docker build -t test:latest .
+IMAGE := dotfiles:latest
+.DEFAULT_GOAL := build
 
-.PHONY: run
-run: test
-	docker run -it --rm --name test test:latest
+.PHONY: build test-docker run clean
+
+# Build the Docker image
+build:
+	docker build -t $(IMAGE) .
+
+# Build then run full install
+test-docker: build
+	docker run --rm $(IMAGE)
+
+# Open an interactive shell inside the container for debugging
+run: build
+	docker run -it --rm --name dotfiles-debug $(IMAGE) bash
+
+clean:
+	docker rmi $(IMAGE) 2>/dev/null || true

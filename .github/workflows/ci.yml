@@ -10,14 +10,28 @@ jobs:
       - uses: actions/setup-python@v3
       - uses: pre-commit/action@v3.0.1
 
-  # test:
-  #   runs-on: ${{ matrix.os }}
-  #   strategy:
-  #     matrix:
-  #       os:
-  #         - macos-latest
-  #         - ubuntu-latest
-  #         # - windows-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - run: ./install
+  test-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Brew install bash
+        run: brew install bash
+
+      - name: Check ZSH version
+        run: zsh --version
+
+      - name: Run install
+        run: ./install
+
+  test-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v4
+
+      - name: Build image
+        run: make build
+
+      - name: Run install
+        run: make test-docker
