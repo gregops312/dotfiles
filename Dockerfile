@@ -1,12 +1,23 @@
-FROM ubuntu:latest
+FROM ubuntu:25.10
 
 RUN apt-get update -y && \
-    apt-get install -y autojump curl direnv git sudo tmux vim zsh && \
-    useradd --create-home --user-group test
-COPY . home/test/code/dotfiles
+    apt-get install -y \
+      autojump \
+      curl \
+      direnv \
+      git \
+      software-properties-common \
+      sudo \
+      tmux \
+      vim \
+      zsh && \
+    useradd --create-home --user-group --shell /bin/zsh test && \
+    echo 'test ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/test && \
+    chmod 0440 /etc/sudoers.d/test
 
-RUN chown -R test:test /home/test
+COPY --chown=test:test . /home/test/dotfiles
 
-# USER test
+USER test
+WORKDIR /home/test/dotfiles
 
-WORKDIR /home/test/code/dotfiles
+CMD ["bash", "install"]
