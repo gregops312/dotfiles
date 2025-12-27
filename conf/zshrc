@@ -5,7 +5,20 @@ export GOPATH=~/code/gocode
 export PATH=$PATH:~/bin:~/code/gocode/bin
 # autoload -U colors && colors
 # autoload -U promptinit
-promptinit
+# promptinit
+
+##
+## Alias finder
+##
+zstyle ':omz:plugins:alias-finder' autoload yes # disabled by default
+zstyle ':omz:plugins:alias-finder' longer yes # disabled by default
+zstyle ':omz:plugins:alias-finder' exact yes # disabled by default
+zstyle ':omz:plugins:alias-finder' cheaper yes # disabled by default
+
+##
+## AWS
+##
+AWS_PAGER=""
 
 ###
 ### TODO
@@ -68,9 +81,10 @@ plugins=(alias-finder ansible autojump aws battery bgnotify brew bundler colored
 source "$ZSH/oh-my-zsh.sh"
 
 if [[ $(uname) == "Darwin" ]]; then
- export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  export PATH="/opt/homebrew/bin:$PATH"
+  source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
 fi
 
 eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
-

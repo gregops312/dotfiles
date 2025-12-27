@@ -50,7 +50,7 @@ check_link() {
 
     # check if the item has 2 links to it,
     # indictating it is a file that has a hard link to it
-    if [[ $(stat --format '%h' "${2}") -eq 2 ]]; then
+    if [[ $(stat -f '%l' "${2}") -eq 2 ]]; then
       echo "linked:skipped: ${2}"
     # If file exists
     elif [[ -e "${2}" ]]; then
@@ -74,11 +74,13 @@ vim_setup() {
   mkdir -p "${HOME}"/.vim/colors
   vim +PluginInstall +qall
 
+  # shellcheck disable=SC2144
   if [[ -f "${HOME}"/.vim/bundle/vim-colorschemes/colors/* ]]; then
    mv "${HOME}"/.vim/bundle/vim-colorschemes/colors/* \
     "${HOME}"/.vim/colors
   fi
 
+  # shellcheck disable=SC2144
   if [[ -f "${HOME}"/.vim/bundle/vim-railscasts-theme/colors/* ]]; then
     mv "${HOME}"/.vim/bundle/vim-railscasts-theme/colors/* \
       "${HOME}"/.vim/colors
@@ -118,8 +120,11 @@ main() {
   check_sym_link "${PWD}/bin" "${HOME}/bin"
 
   if $WORK; then
+    # shellcheck disable=SC2016
+    grep -qxF 'export PATH="$HOME/bin-work:$PATH"' conf/zshrc || echo 'export PATH="$HOME/bin-work:$PATH"' >> conf/zshrc
     grep -qxF 'source ~/.zshrc-work' conf/zshrc || echo 'source ~/.zshrc-work' >> conf/zshrc
   fi
+  # shellcheck disable=SC1090
   source ~/.zshrc
 }
 

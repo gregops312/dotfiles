@@ -52,7 +52,7 @@ ssl() {
 
 usage () {
   cat <<EOF
-  Usage: $(basename $0) [-b | -e | -s | -v | -z]
+  Usage: $(basename "$0") [-b | -e | -s | -v | -z]
     -b: Bash
     -e: ElasticSearch
     -s: SSL
@@ -98,4 +98,4 @@ zsh() {
   "
 }
 
-main $@
+main "$@"

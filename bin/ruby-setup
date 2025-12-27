@@ -2,20 +2,19 @@
 
 handle_directory() {
   echo "Directory name: "
-  read dir_name
+  read -r dir_name
 
   if [[ -z "$dir_name" ]]; then
     echo "Using $(pwd)"
   else
-    mkdir $dir_name || echo "$dir_name already exists"
-    cd $dir_name
-    echo $dir_name > ".ruby-gemset"
+    mkdir "$dir_name" || echo "$dir_name already exists"
+    cd "$dir_name" || exit
+    echo "$dir_name" > ".ruby-gemset"
   fi
 }
 
 ruby_installed() {
-  which ruby
-  if [[ $? -ne 0 ]]; then
+  if ! which ruby; then
     echo 'Ruby not installed, quitting'
     exit 1
   fi
@@ -34,7 +33,7 @@ EOL
 
 set_ruby_version() {
   echo "Select ruby version: "
-  read version
+  read -r version
   echo "${version}" > .ruby-version
 }
 
