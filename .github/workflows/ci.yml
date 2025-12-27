@@ -1,0 +1,23 @@
+name: ci
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v3
+      - uses: pre-commit/action@v3.0.1
+
+  # test:
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     matrix:
+  #       os:
+  #         - macos-latest
+  #         - ubuntu-latest
+  #         # - windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - run: ./install

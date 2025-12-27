@@ -32,7 +32,7 @@ delete_local_branch() {
   local branch="$1"
 
   if [[ "$DRY_RUN" != "false" ]]; then
-    echo git branch -d \"$branch\"
+    echo git branch -d \""$branch"\"
   else
     git branch -d "$branch"
   fi
@@ -45,7 +45,7 @@ delete_remote_branch() {
   local branch="$2"
 
   if [[ "$DRY_RUN" != "false" ]]; then
-    echo git push --force \"$remote\" :\"$branch\"
+    echo git push --force \""$remote"\" :\""$branch"\"
   else
     git push --force "$remote" :"$branch"
   fi
@@ -55,7 +55,7 @@ delete_remote_branch() {
 
 usage () {
   cat <<EOF
-Usage: $(basename $0) [-a | -r | -l] [-f]
+Usage: $(basename "$0") [-a | -r | -l] [-f]
    -r: Delete remote branches, from origin \$REMOTE_NAME (default: 'origin').
    -l: Delete local branches.
    -a: Delete both local and remote branches.
