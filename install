@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# set -x
 
 # EX: ./install -w
 
-set -eu
-# set -x
-
 mapfile -t CONFIGS < <(ls conf)
+OS="$(uname)"
 WORK=false
 
 install_helix() {
   if ! command -v hx > /dev/null 2>&1; then
-    if [[ $(uname) == "Darwin" ]]; then
+    if [[ "${OS}" == "Darwin" ]]; then
       brew install helix
-    elif [[ $(uname) == "Linux" ]]; then
+    elif [[ "${OS}" == "Linux" ]]; then
       sudo add-apt-repository --yes ppa:maveonair/helix-editor
       sudo apt-get update -y > /dev/null
       sudo apt-get install -y helix > /dev/null
@@ -28,9 +28,9 @@ install_oh_my_zsh() {
 
 install_starship() {
   if ! command -v starship > /dev/null 2>&1; then
-    if [[ $(uname) == "Darwin" ]]; then
+    if [[ "${OS}" == "Darwin" ]]; then
       brew install starship
-    elif [[ $(uname) == "Linux" ]]; then
+    elif [[ "${OS}" == "Linux" ]]; then
       sudo apt-get update -y > /dev/null
       sudo apt-get install -y starship > /dev/null
     fi
@@ -57,21 +57,21 @@ check_link() {
   if ! [[ -e "${2}" ]]; then
     noisy_link "${1}" "${2}"
   else
-    if [[ $(uname) == "Darwin" ]]; then
+    if [[ "${OS}" == "Darwin" ]]; then
       if [[ $(stat -f '%l' "${2}") -eq 2 ]]; then
         echo "linked:skipped: ${2}"
       # If file exists
       elif [[ -e "${2}" ]]; then
         echo "not-linked:exists:skipped: rm -rf ${2}"
       fi
-    elif [[ $(uname) == "Linux" ]]; then
+    elif [[ "${OS}" == "Linux" ]]; then
       if [[ $(stat --format '%h' "${2}") -eq 2 ]]; then
         echo "linked:skipped: ${2}"
       elif [[ -e "${2}" ]]; then
         echo "not-linked:exists:skipped: rm -rf ${2}"
       fi
     else
-      echo "Unsupported OS: $(uname)"
+      echo "Unsupported OS: ${OS}"
       exit 1
     fi
   fi
@@ -144,8 +144,8 @@ main() {
     grep -qxF 'export PATH="$HOME/bin-work:$PATH"' conf/zshrc || echo 'export PATH="$HOME/bin-work:$PATH"' >> conf/zshrc
     grep -qxF 'source ~/.zshrc-work' conf/zshrc || echo 'source ~/.zshrc-work' >> conf/zshrc
   fi
+  # Only reload zshrc in interactive sessions (skipped in Docker/CI)
   # shellcheck disable=SC1090
-  # source ~/.zshrc
   [[ $- == *i* ]] && source ~/.zshrc || true
 }
 
