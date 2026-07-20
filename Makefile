@@ -7,7 +7,7 @@ IMAGE := dotfiles:latest
 build:
 	docker build -t $(IMAGE) .
 
-# Build then run full install
+# Build then run full install + file assertions inside a clean container
 test-docker: build
 	docker run --rm $(IMAGE)
 
