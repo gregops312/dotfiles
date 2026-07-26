@@ -3,9 +3,11 @@ FROM ubuntu:25.10
 RUN apt-get update -y && \
     apt-get install -y \
       autojump \
+      bats \
       curl \
       direnv \
       git \
+      make \
       software-properties-common \
       sudo \
       tmux \

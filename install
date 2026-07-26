@@ -23,6 +23,9 @@ install_helix() {
 install_oh_my_zsh() {
   if ! [[ -d "${HOME}/.oh-my-zsh" ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended  > /dev/null
+
+    # Remove oh-my-zsh's .zshrc
+    rm -f "${HOME}/.zshrc"
   fi
 }
 
@@ -157,4 +160,11 @@ EOF
   exit 1
 }
 
-main "$@"
+# Only execute when this script is run directly, not when sourced
+# (e.g. by the unit tests that need access to the helper functions).
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  main "$@"
+else
+  # Avoid leaking strict-mode options into the caller when sourced (e.g. bats).
+  set +e +u +o pipefail
+fi

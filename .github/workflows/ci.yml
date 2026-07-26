@@ -14,24 +14,34 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Brew install bash
         run: brew install bash
 
-      - name: Check ZSH version
-        run: zsh --version
+      - name: Isolate HOME for install
+        run: |
+          echo "HOME=$GITHUB_WORKSPACE/.test-home" >> "$GITHUB_ENV"
+          mkdir -p "$GITHUB_WORKSPACE/.test-home"
 
       - name: Run install
         run: ./install
+
+      - name: Run bats tests
+        run: make test-local
 
   test-linux:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
       - uses: docker/setup-buildx-action@v4
 
       - name: Build image
         run: make build
 
-      - name: Run install
+      - name: Run install + bats tests in container
         run: make test-docker
