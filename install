@@ -8,6 +8,9 @@ mapfile -t CONFIGS < <(ls conf)
 OS="$(uname)"
 WORK=false
 
+##
+## Install tools
+##
 install_helix() {
   if ! command -v hx > /dev/null 2>&1; then
     if [[ "${OS}" == "Darwin" ]]; then
@@ -16,6 +19,17 @@ install_helix() {
       sudo add-apt-repository --yes ppa:maveonair/helix-editor
       sudo apt-get update -y > /dev/null
       sudo apt-get install -y helix > /dev/null
+    fi
+  fi
+}
+
+install_neovim() {
+  if ! command -v nvim > /dev/null 2>&1; then
+    if [[ "${OS}" == "Darwin" ]]; then
+      brew install neovim
+    elif [[ "${OS}" == "Linux" ]]; then
+      sudo apt-get update -y > /dev/null
+      sudo apt-get install -y neovim > /dev/null
     fi
   fi
 }
@@ -40,9 +54,24 @@ install_starship() {
   fi
 }
 
-install_vim_vundle() {
+install_vim() {
   if ! [[  -d "${HOME}/.vim/bundle/Vundle.vim" ]]; then
     git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  fi
+
+  mkdir -p "${HOME}"/.vim/colors
+  vim --clean '+source ~/.vimrc' +PluginInstall +qall
+
+  # shellcheck disable=SC2144
+  if [[ -f "${HOME}"/.vim/bundle/vim-colorschemes/colors/* ]]; then
+   mv "${HOME}"/.vim/bundle/vim-colorschemes/colors/* \
+    "${HOME}"/.vim/colors
+  fi
+
+  # shellcheck disable=SC2144
+  if [[ -f "${HOME}"/.vim/bundle/vim-railscasts-theme/colors/* ]]; then
+    mv "${HOME}"/.vim/bundle/vim-railscasts-theme/colors/* \
+      "${HOME}"/.vim/colors
   fi
 }
 
@@ -90,6 +119,20 @@ check_sym_link() {
   fi
 }
 
+##
+## Setup configs
+##
+setup_configs() {
+  echo "TBD setup configs"
+}
+
+setup_configs_work() {
+  echo "TBD setup configs for work"
+}
+
+##
+## Main
+##
 options() {
   while getopts ":w" opt; do
     case "${opt}" in
@@ -101,29 +144,14 @@ options() {
   done
 }
 
-vim_setup() {
-  install_vim_vundle
-  mkdir -p "${HOME}"/.vim/colors
-  vim --clean '+source ~/.vimrc' +PluginInstall +qall
-
-  # shellcheck disable=SC2144
-  if [[ -f "${HOME}"/.vim/bundle/vim-colorschemes/colors/* ]]; then
-   mv "${HOME}"/.vim/bundle/vim-colorschemes/colors/* \
-    "${HOME}"/.vim/colors
-  fi
-
-  # shellcheck disable=SC2144
-  if [[ -f "${HOME}"/.vim/bundle/vim-railscasts-theme/colors/* ]]; then
-    mv "${HOME}"/.vim/bundle/vim-railscasts-theme/colors/* \
-      "${HOME}"/.vim/colors
-  fi
-}
-
 main() {
   options "$@"
   # install_helix
   install_oh_my_zsh
   install_starship
+  install_vim
+  # setup_configs
+  # setup_configs_work
 
   # Hard link all config files
   for i in "${CONFIGS[@]}"; do
@@ -139,7 +167,6 @@ main() {
     check_link "conf/${i}" "${HOME}/.${i}"
   done
 
-  vim_setup
   check_sym_link "${PWD}/bin" "${HOME}/bin"
 
   if $WORK; then
@@ -153,10 +180,8 @@ main() {
 }
 
 usage() {
-  cat <<EOF
-  Usage: $(basename "$0") [-w]
-    -w: Is this a work machine?
-EOF
+  echo "Usage: $(basename "${0}") [-w]"
+  echo "  -w: Is this a work machine?"
   exit 1
 }
 
