@@ -1,11 +1,16 @@
 IMAGE := dotfiles:latest
+UID   := $(shell id -u)
+GID   := $(shell id -g)
 .DEFAULT_GOAL := build
 
 .PHONY: build clean install run test-local test-docker
 
 # Build the Docker image
 build:
-	docker build -t $(IMAGE) .
+	docker build \
+	--build-arg UID=$(UID) \
+	--build-arg GID=$(GID) \
+	-t $(IMAGE) .
 
 # Remove the Docker image and any test-run home directory
 clean:
@@ -29,7 +34,6 @@ test-local:
 # Use .test-home as the home directory for the test run.
 test-docker: build
 	docker run --rm \
-		--user "$(shell id -u):$(shell id -g)" \
 	    -v "$(PWD)":/home/test/dotfiles \
 	    $(IMAGE) \
 	    bash -lc 'export HOME=/home/test/dotfiles/.test-home; rm -rf "$$HOME"; mkdir -p "$$HOME"; bash install && make test-local'
