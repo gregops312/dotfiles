@@ -4,7 +4,6 @@ set -euo pipefail
 
 # EX: ./install -w
 
-mapfile -t CONFIGS < <(ls conf)
 OS="$(uname)"
 WORK=false
 
@@ -75,38 +74,10 @@ install_vim() {
   fi
 }
 
+# TODO: remove this
 sym_link() {
   echo "ln -s \"${1}\" \"${2}\""
   ln -s "${1}" "${2}"
-}
-
-noisy_link() {
-  echo "ln \"${1}\" \"${2}\""
-  ln "${1}" "${2}"
-}
-
-check_link() {
-  if ! [[ -e "${2}" ]]; then
-    noisy_link "${1}" "${2}"
-  else
-    if [[ "${OS}" == "Darwin" ]]; then
-      if [[ $(stat -f '%l' "${2}") -eq 2 ]]; then
-        echo "linked:skipped: ${2}"
-      # If file exists
-      elif [[ -e "${2}" ]]; then
-        echo "not-linked:exists:skipped: rm -rf ${2}"
-      fi
-    elif [[ "${OS}" == "Linux" ]]; then
-      if [[ $(stat --format '%h' "${2}") -eq 2 ]]; then
-        echo "linked:skipped: ${2}"
-      elif [[ -e "${2}" ]]; then
-        echo "not-linked:exists:skipped: rm -rf ${2}"
-      fi
-    else
-      echo "Unsupported OS: ${OS}"
-      exit 1
-    fi
-  fi
 }
 
 check_sym_link() {
@@ -123,7 +94,15 @@ check_sym_link() {
 ## Setup configs
 ##
 setup_configs() {
-  echo "TBD setup configs"
+  local config_json
+  config_json="$(yq -o=json config.yaml)"
+  for key in $(echo "${config_json}" | jq -r 'keys[]'); do
+    local source target
+    source="$(echo "${config_json}" | jq -r --arg k "${key}" '.[$k].source')"
+    target="$(echo "${config_json}" | jq -r --arg k "${key}" '.[$k].target')"
+    check_sym_link "$(pwd)/${source}" "${HOME}/${target}"
+  done
+
 }
 
 setup_configs_work() {
@@ -150,24 +129,11 @@ main() {
   install_oh_my_zsh
   install_starship
   install_vim
-  # setup_configs
+
+  mkdir -p "${HOME}/.config"
+
+  setup_configs
   # setup_configs_work
-
-  # Hard link all config files
-  for i in "${CONFIGS[@]}"; do
-    if [[ "${i}" == *"greg-kman.zsh-theme"* ]]; then
-      check_link  "conf/${i}" "${HOME}/.oh-my-zsh/themes/greg-kman.zsh-theme"
-      continue
-    fi
-    if [[ "${i}" == *"starship.toml"* ]]; then
-      mkdir -p "${HOME}/.config"
-      check_link  "conf/${i}" "${HOME}/.config/starship.toml"
-      continue
-    fi
-    check_link "conf/${i}" "${HOME}/.${i}"
-  done
-
-  check_sym_link "${PWD}/bin" "${HOME}/bin"
 
   if $WORK; then
     # shellcheck disable=SC2016

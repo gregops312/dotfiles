@@ -1,5 +1,4 @@
 export SHOW_AWS_PROMPT=false
-export TFENV_AUTO_INSTALL=true
 export ZSH=~/.oh-my-zsh
 export GOPATH=~/code/gocode
 export PATH=$PATH:~/bin:~/code/gocode/bin
@@ -44,17 +43,18 @@ export AWS_PAGER=""
 alias cl='clear'
 
 ##
-## Terraform
+## Open Tofu
 ##
-alias tfg="terraform get -update"
-alias tfi="terraform init"
-alias tfu="terraform init -upgrade"
-alias tfimp="terraform import"
-alias tfp="terraform plan -parallelism 250 -out tfplan"
-alias tfip="terraform init && terraform plan -parallelism 250 -out tfplan"
-alias tfa="terraform apply -parallelism 250 \"tfplan\""
-alias tfv="terraform version"
-alias tff="terraform fmt -recursive $(git rev-parse --show-toplevel)"
+export TOFUENV_AUTO_INSTALL=true
+alias tfg='tofu get -update'
+alias tfi='tofu init'
+alias tfp="tofu plan -parallelism 250 -out tfplan"
+alias tfip="tofu init && tofu plan -parallelism 250 -out tfplan"
+alias tfa="tofu apply -parallelism 250 \"tfplan\""
+alias tf-import="tofu import"
+alias tf-version="tofu version"
+alias tf-fmt="tofu fmt -recursive $(git rev-parse --show-toplevel)"
+#alias tfs="cat \"$(find . -type d -name .terraform)/terraform.tfstate\" | jq -r '.backend.config | \"s3://\(.bucket)/\(.key)\"'"
 
 # Set theme in ~/.oh-my-zsh/themes/
 ZSH_THEME="greg-kman"
@@ -76,13 +76,18 @@ function cd-gt() {
   cd $(git rev-parse --show-toplevel)
 }
 
-plugins=(alias-finder ansible autojump aws battery bgnotify brew bundler colored-man-pages colorize direnv docker docker-compose encode64 extract git git-auto-fetch git-prompt gitignore golang kubectl macos node npm podman pre-commit python starship sudo terraform tmux ubuntu vagrant vault vscode web-search)
+plugins=(alias-finder ansible autojump aws battery bgnotify brew bundler colored-man-pages colorize direnv docker docker-compose encode64 extract fzf git git-auto-fetch git-prompt gitignore golang kubectl macos node npm opentofu podman pre-commit python starship sudo tmux ubuntu vagrant web-search)
+fpath=(~/.zsh-functions $fpath)
+# autoload -Uz fd
+# autoload -Uz iac-clean
+# autoload -Uz aws-login
 
 source "$ZSH/oh-my-zsh.sh"
 
 if [[ $(uname) == "Darwin" ]]; then
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="/opt/homebrew/bin:$PATH"
+  export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
   source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
 fi
 

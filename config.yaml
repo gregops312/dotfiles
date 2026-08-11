@@ -1,0 +1,25 @@
+---
+bin:
+  source: bin
+  target: "bin"
+gitconfig:
+  source: conf/gitconfig
+  target: ".gitconfig"
+starship:
+  source: conf/starship.toml
+  target: ".config/starship.toml"
+tmux:
+  source: conf/tmux.conf
+  target: ".tmux.conf"
+vimrc:
+  source: conf/vimrc
+  target: ".vimrc"
+zsh-theme:
+  source: conf/greg-kman.zsh-theme
+  target: ".oh-my-zsh/themes/greg-kman.zsh-theme"
+zsh-functions:
+  source: zsh-functions
+  target: ".zsh-functions"
+zshrc:
+  source: conf/zshrc
+  target: ".zshrc"
