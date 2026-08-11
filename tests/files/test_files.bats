@@ -11,43 +11,46 @@ setup() {
     cd "$DOTFILES_ROOT" || return
 }
 
-# ── Hard links ────────────────────────────────────────────────────────────────
-
-@test "[links] gitconfig is hard-linked to ~/.gitconfig" {
-    assert_file_exists "$HOME/.gitconfig"
-    assert_equal "$(get_inode conf/gitconfig)" "$(get_inode "$HOME/.gitconfig")"
-}
-
-@test "[links] vimrc is hard-linked to ~/.vimrc" {
-    assert_file_exists "$HOME/.vimrc"
-    assert_equal "$(get_inode conf/vimrc)" "$(get_inode "$HOME/.vimrc")"
-}
-
-@test "[links] tmux.conf is hard-linked to ~/.tmux.conf" {
-    assert_file_exists "$HOME/.tmux.conf"
-    assert_equal "$(get_inode conf/tmux.conf)" "$(get_inode "$HOME/.tmux.conf")"
-}
-
-@test "[links] zshrc is hard-linked to ~/.zshrc" {
-    assert_file_exists "$HOME/.zshrc"
-    assert_equal "$(get_inode conf/zshrc)" "$(get_inode "$HOME/.zshrc")"
-}
-
-@test "[links] starship.toml is hard-linked to ~/.config/starship.toml" {
-    assert_file_exists "$HOME/.config/starship.toml"
-    assert_equal "$(get_inode conf/starship.toml)" "$(get_inode "$HOME/.config/starship.toml")"
-}
-
-@test "[links] greg-kman theme is hard-linked into oh-my-zsh themes" {
-    assert_file_exists "$HOME/.oh-my-zsh/themes/greg-kman.zsh-theme"
-    assert_equal "$(get_inode conf/greg-kman.zsh-theme)" "$(get_inode "$HOME/.oh-my-zsh/themes/greg-kman.zsh-theme")"
-}
-
-# ── Symlink ───────────────────────────────────────────────────────────────────
+# ── Symlinks (from config.yaml) ───────────────────────────────────────────────
 
 @test "[links] bin/ is symlinked to ~/bin" {
-    assert_link_exists "$HOME/bin"
-    assert_equal "$(readlink "$HOME/bin")" "${DOTFILES_ROOT}/bin"
+     assert_link_exists "$HOME/bin"
+     assert_equal "$(readlink "$HOME/bin")" "${DOTFILES_ROOT}/bin"
+ }
+
+@test "[links] gitconfig is symlinked to ~/.gitconfig" {
+    assert_link_exists "$HOME/.gitconfig"
+    assert_equal "$(readlink "$HOME/.gitconfig")" "${DOTFILES_ROOT}/conf/gitconfig"
+}
+
+@test "[links] vimrc is symlinked to ~/.vimrc" {
+    assert_link_exists "$HOME/.vimrc"
+    assert_equal "$(readlink "$HOME/.vimrc")" "${DOTFILES_ROOT}/conf/vimrc"
+}
+
+@test "[links] tmux.conf is symlinked to ~/.tmux.conf" {
+    assert_link_exists "$HOME/.tmux.conf"
+    assert_equal "$(readlink "$HOME/.tmux.conf")" "${DOTFILES_ROOT}/conf/tmux.conf"
+}
+
+@test "[links] zshrc is symlinked to ~/.zshrc" {
+    assert_link_exists "$HOME/.zshrc"
+    assert_equal "$(readlink "$HOME/.zshrc")" "${DOTFILES_ROOT}/conf/zshrc"
+}
+
+@test "[links] starship.toml is symlinked to ~/.config/starship.toml" {
+    assert_link_exists "$HOME/.config/starship.toml"
+    assert_equal "$(readlink "$HOME/.config/starship.toml")" "${DOTFILES_ROOT}/conf/starship.toml"
+}
+
+@test "[links] greg-kman theme is symlinked into oh-my-zsh themes" {
+    assert_link_exists "$HOME/.oh-my-zsh/themes/greg-kman.zsh-theme"
+    assert_equal "$(readlink "$HOME/.oh-my-zsh/themes/greg-kman.zsh-theme")" "${DOTFILES_ROOT}/conf/greg-kman.zsh-theme"
+}
+
+@test "[links] zsh-functions is symlinked to ~/.zsh-functions" {
+    assert_link_exists "$HOME/.zsh-functions"
+    assert_equal "$(readlink "$HOME/.zsh-functions")" "${DOTFILES_ROOT}/zsh-functions"
 }
 
 # ── Installed tools ───────────────────────────────────────────────────────────
