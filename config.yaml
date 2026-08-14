@@ -5,6 +5,9 @@ bin:
 gitconfig:
   source: conf/gitconfig
   target: ".gitconfig"
+helix:
+  source: conf/helix
+  target: ".config/helix"
 starship:
   source: conf/starship.toml
   target: ".config/starship.toml"

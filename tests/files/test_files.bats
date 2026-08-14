@@ -53,6 +53,11 @@ setup() {
     assert_equal "$(readlink "$HOME/.zsh-functions")" "${DOTFILES_ROOT}/zsh-functions"
 }
 
+@test "[links] helix config dir is symlinked to ~/.config/helix" {
+    assert_link_exists "$HOME/.config/helix"
+    assert_equal "$(readlink "$HOME/.config/helix")" "${DOTFILES_ROOT}/conf/helix"
+}
+
 # ── Installed tools ───────────────────────────────────────────────────────────
 
 @test "[tools] oh-my-zsh is installed" {
@@ -64,8 +69,42 @@ setup() {
     assert_success
 }
 
+@test "[tools] helix (hx) is on PATH" {
+    run command -v hx
+    assert_success
+}
+
+@test "[tools] helix (hx) reports its version" {
+    run hx --version
+    assert_success
+    assert_output --partial "helix"
+}
+
+@test "[tools] neovim (nvim) is on PATH" {
+    run command -v nvim
+    assert_success
+}
+
+@test "[tools] neovim (nvim) reports its version" {
+    run nvim --version
+    assert_success
+    assert_output --partial "NVIM"
+}
+
 @test "[tools] vundle is installed" {
     assert_dir_exists "$HOME/.vim/bundle/Vundle.vim"
+}
+
+# ── Configs ───────────────────────────────────────────────────────────────────
+
+@test "[config] helix config file is present under ~/.config/helix" {
+    # NOTE: source file is named 'config..toml' (two dots) in conf/helix/.
+    # Helix looks for 'config.toml' — this test reflects the deployed state.
+    assert_file_exists "$HOME/.config/helix/config.toml"
+}
+
+@test "[config] helix languages.toml is present under ~/.config/helix" {
+    assert_file_exists "$HOME/.config/helix/languages.toml"
 }
 
 # ── Shell ─────────────────────────────────────────────────────────────────────

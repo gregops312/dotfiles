@@ -11,25 +11,60 @@ WORK=false
 ## Install tools
 ##
 install_helix() {
-  if ! command -v hx > /dev/null 2>&1; then
-    if [[ "${OS}" == "Darwin" ]]; then
-      brew install helix
-    elif [[ "${OS}" == "Linux" ]]; then
-      sudo add-apt-repository --yes ppa:maveonair/helix-editor
-      sudo apt-get update -y > /dev/null
-      sudo apt-get install -y helix > /dev/null
-    fi
+  if command -v hx > /dev/null 2>&1; then return; fi
+  if [[ "${OS}" == "Darwin" ]]; then
+    brew install helix
+  elif [[ "${OS}" == "Linux" ]]; then
+    local arch os
+
+    arch=$(uname -m)
+    os=linux
+    mkdir -p "${HOME}/.local/bin"
+
+    download_url=$(curl -fsSL https://api.github.com/repos/helix-editor/helix/releases/latest | \
+      jq -r --arg arch "${arch}" --arg os "${os}" '.assets[] | select(.browser_download_url | contains($arch) and contains($os)) | .browser_download_url')
+    release=$(curl -fsSL https://api.github.com/repos/helix-editor/helix/releases/latest | jq -r '.name')
+    curl -sL "${download_url}" -o /tmp/helix.tar.xz
+    tar xf /tmp/helix.tar.xz -C /tmp/
+    mv "/tmp/helix-${release}-${arch}-${os}/hx" "${HOME}/.local/bin/hx"
+    rm -rf /tmp/helix.tar.xz /tmp/helix
   fi
+
+  # TODO: Install dependency npm
+  # Language Server Protocol (LSP) support for Helix
+  # # Ansible
+  # npm i -g @ansible/ansible-language-server
+
+  # # Bash
+  # npm i -g bash-language-server
+
+  # # Docker
+  # npm install -g dockerfile-language-server-nodejs
+  # npm install -g @microsoft/compose-language-service
+
+  # # Json
+  # npm i -g vscode-langservers-extracted
+
+  # # SQL
+  # npm i -g sql-language-server
+
+  # # Terraform
+  # https://github.com/helix-editor/helix/wiki/Language-Server-Configurations#terraform
+  # brew install hashicorp/tap/terraform-ls
+
+  # # TOML
+  # https://github.com/helix-editor/helix/wiki/Language-Server-Configurations#terraform
+  # brew install taplo
 }
 
 install_neovim() {
-  if ! command -v nvim > /dev/null 2>&1; then
-    if [[ "${OS}" == "Darwin" ]]; then
-      brew install neovim
-    elif [[ "${OS}" == "Linux" ]]; then
-      sudo apt-get update -y > /dev/null
-      sudo apt-get install -y neovim > /dev/null
-    fi
+  if command -v nvim > /dev/null 2>&1; then return; fi
+
+  if [[ "${OS}" == "Darwin" ]]; then
+    brew install neovim
+  elif [[ "${OS}" == "Linux" ]]; then
+    sudo apt-get update -y > /dev/null
+    sudo apt-get install -y neovim > /dev/null
   fi
 }
 
@@ -43,13 +78,13 @@ install_oh_my_zsh() {
 }
 
 install_starship() {
-  if ! command -v starship > /dev/null 2>&1; then
-    if [[ "${OS}" == "Darwin" ]]; then
-      brew install starship
-    elif [[ "${OS}" == "Linux" ]]; then
-      sudo apt-get update -y > /dev/null
-      sudo apt-get install -y starship > /dev/null
-    fi
+  if command -v starship > /dev/null 2>&1; then return; fi
+
+  if [[ "${OS}" == "Darwin" ]]; then
+    brew install starship
+  elif [[ "${OS}" == "Linux" ]]; then
+    sudo apt-get update -y > /dev/null
+    sudo apt-get install -y starship > /dev/null
   fi
 }
 
@@ -96,6 +131,7 @@ check_sym_link() {
 setup_configs() {
   local config_json
   config_json="$(yq -o=json config.yaml)"
+  mkdir -p "${HOME}/.config"
   for key in $(echo "${config_json}" | jq -r 'keys[]'); do
     local source target
     source="$(echo "${config_json}" | jq -r --arg k "${key}" '.[$k].source')"
@@ -125,13 +161,11 @@ options() {
 
 main() {
   options "$@"
-  # install_helix
+  install_helix
+  install_neovim
   install_oh_my_zsh
   install_starship
   install_vim
-
-  mkdir -p "${HOME}/.config"
-
   setup_configs
   # setup_configs_work
 
