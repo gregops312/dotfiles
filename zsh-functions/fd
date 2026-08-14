@@ -1,0 +1,6 @@
+cd $(find . -not -path '*/.git/*' -type d | fzf)
+
+# local dir
+# dir="$(find . -not -path '*/.git/*' -type d | fzf)" || return
+# [[ -n "$dir" ]] || return
+# cd -- "$dir"

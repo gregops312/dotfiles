@@ -28,7 +28,7 @@ run: build
 # NOTE: file assertions require ./install to have already run into $HOME.
 test-local:
 	tests/libs/bats/bin/bats --recursive tests/unit/
-	tests/libs/bats/bin/bats --recursive tests/files/
+	zsh -ic 'tests/libs/bats/bin/bats --recursive tests/files/'
 
 # Run Docker container, install script, & test-local.
 # Use .test-home as the home directory for the test run.
