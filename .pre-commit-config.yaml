@@ -19,6 +19,8 @@ repos:
       - id: mixed-line-ending
       - id: no-commit-to-branch
       - id: pretty-format-json
+        args:
+          - --autofix
       - id: trailing-whitespace
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1

@@ -10,6 +10,15 @@ WORK=false
 ##
 ## Install tools
 ##
+install_deps() {
+  if [[ "${OS}" == "Darwin" ]]; then
+    brew install --quiet autojump direnv fzf jq tmux
+  elif [[ "${OS}" == "Linux" ]]; then
+    sudo apt-get update -y > /dev/null
+    sudo apt-get install -y autojump curl direnv fzf git jq tmux vim xz-utils zsh> /dev/null
+  fi
+}
+
 install_helix() {
   if command -v hx > /dev/null 2>&1; then return; fi
   if [[ "${OS}" == "Darwin" ]]; then
@@ -130,7 +139,7 @@ check_sym_link() {
 ##
 setup_configs() {
   local config_json
-  config_json="$(yq -o=json config.yaml)"
+  config_json="$(cat config.json)"
   mkdir -p "${HOME}/.config"
   for key in $(echo "${config_json}" | jq -r 'keys[]'); do
     local source target
@@ -161,18 +170,20 @@ options() {
 
 main() {
   options "$@"
+  install_deps
   install_helix
   install_neovim
   install_oh_my_zsh
   install_starship
   install_vim
   setup_configs
-  # setup_configs_work
 
   if $WORK; then
     # shellcheck disable=SC2016
     grep -qxF 'export PATH="$HOME/bin-work:$PATH"' conf/zshrc || echo 'export PATH="$HOME/bin-work:$PATH"' >> conf/zshrc
     grep -qxF 'source ~/.zshrc-work' conf/zshrc || echo 'source ~/.zshrc-work' >> conf/zshrc
+
+    setup_configs_work
   fi
   # Only reload zshrc in interactive sessions (skipped in Docker/CI)
   # shellcheck disable=SC1090
