@@ -27,6 +27,7 @@ format = '[\[$symbol($profile) @ ($region)\]]($style)'
 symbol = '☁️ '
 style = 'bold yellow'
 [aws.region_aliases]
+eu-central-1 = 'ec1'
 eu-west-1 = 'ew1'
 us-east-1 = 'ue1'
 us-west-2 = 'uw2'
