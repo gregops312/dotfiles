@@ -147,11 +147,25 @@ setup_configs() {
     target="$(echo "${config_json}" | jq -r --arg k "${key}" '.[$k].target')"
     check_sym_link "$(pwd)/${source}" "${HOME}/${target}"
   done
-
 }
 
 setup_configs_work() {
-  echo "TBD setup configs for work"
+  echo "##"
+  echo "## Work configs"
+  echo "##"
+
+  local config_json
+  config_json="$(cat config-work.json)"
+  for key in $(echo "${config_json}" | jq -r 'keys[]'); do
+    local source target
+    source="$(echo "${config_json}" | jq -r --arg k "${key}" '.[$k].source')"
+    target="$(echo "${config_json}" | jq -r --arg k "${key}" '.[$k].target')"
+    if [[ ! -e "$(pwd)/${source}" ]]; then
+      printf 'Missing work configuration: %s\n' "$(pwd)/${source}" >&2
+      return 1
+    fi
+    check_sym_link "$(pwd)/${source}" "${HOME}/${target}"
+  done
 }
 
 ##

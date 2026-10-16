@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-set -eu
-set -o pipefail
+set -euo pipefail
 
 MASTER_BRANCH_NAME="${MASTER_BRANCH_NAME:-master}"
 REMOTE_NAME="${REMOTE_NAME:-origin}"
