@@ -53,8 +53,6 @@ alias tfip="tofu init && tofu plan -parallelism 250 -out tfplan"
 alias tfa="tofu apply -parallelism 250 \"tfplan\""
 alias tf-import="tofu import"
 alias tf-version="tofu version"
-alias tf-fmt="tofu fmt -recursive $(git rev-parse --show-toplevel)"
-#alias tfs="cat \"$(find . -type d -name .terraform)/terraform.tfstate\" | jq -r '.backend.config | \"s3://\(.bucket)/\(.key)\"'"
 
 # Set theme in ~/.oh-my-zsh/themes/
 ZSH_THEME="greg-kman"
@@ -72,15 +70,9 @@ function bgnotify_formatted {
   bgnotify "$title -- after $3 s" "$2";
 }
 
-function cd-gt() {
-  cd $(git rev-parse --show-toplevel)
-}
-
 plugins=(alias-finder ansible autojump aws battery bgnotify brew bundler colored-man-pages colorize direnv docker docker-compose encode64 extract fzf git git-auto-fetch git-prompt gitignore golang kubectl macos node npm opentofu podman pre-commit python starship sudo tmux ubuntu vagrant web-search)
 fpath=(~/.zsh-functions $fpath)
-# autoload -Uz fd
-# autoload -Uz iac-clean
-# autoload -Uz aws-login
+autoload -Uz ~/.zsh-functions/*(N.:t)
 
 source "$ZSH/oh-my-zsh.sh"
 
@@ -88,7 +80,6 @@ if [[ $(uname) == "Darwin" ]]; then
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="/opt/homebrew/bin:$PATH"
   export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
-  source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
 fi
 
 eval "$(direnv hook zsh)"

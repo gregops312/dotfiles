@@ -1,0 +1,10 @@
+{
+  "bin": {
+    "source": "work/bin",
+    "target": "bin-work"
+  },
+  "zshrc": {
+    "source": "work/zshrc",
+    "target": ".zshrc-work"
+  }
+}
